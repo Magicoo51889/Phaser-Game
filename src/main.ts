@@ -9,7 +9,7 @@ const config:GameConfig = {
     width: window.innerWidth, // the width and height is scaled to the window
     height: window.innerHeight,
     resolution: 1, 
-    backgroundColor: "#18216D", // this is a dark blue background
+    backgroundColor: "#fcfff2", // this is a cream background
     physics: {
         default: 'matter',
         matter: {
