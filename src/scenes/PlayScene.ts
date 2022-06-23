@@ -1,12 +1,15 @@
 import controls from '../components/controls';
+import screenWrap from '../components/screenWrap';
 
 export default class Planet_1 extends Phaser.Scene {
 	player: Phaser.GameObjects.Sprite;
+	enemy: Phaser.GameObjects.Sprite;
 	cursors: any;
 	keys: any;
 
-	playerHealthPoints: number;
-	enemyHealthPoints: number
+	public playerHealthPoints: number;
+	public enemyHealthPoints: number;
+	public enemiesRemaining: number;
 
 	constructor() {
     super({
@@ -17,32 +20,33 @@ export default class Planet_1 extends Phaser.Scene {
 	init() {
 		this.playerHealthPoints = 100; // this is the player's health in percentage points
 		this.enemyHealthPoints = 100; // this is the enemy's health in percentage points
+
+		this.enemiesRemaining = 3; // this is the number of enemies remaining in the level
 	}
 	
 	preload() {
-		this.load.tilemapTiledJSON('map', '/assets/tilemaps/desert.json'); // this is the tilemap data in JSON format
-		this.load.image('Desert', '/assets/tilemaps/tmw_desert_spacing.png'); // this is the tilemap image
-		this.load.image('player', '/assets/sprites/SpaceShip.png'); // this is the space ship sprite
+		this.load.image('background', './assets/sprites/Sky.png');
+		this.load.image('player', './assets/sprites/SpaceShip.png'); // this is the space ship sprite
+		this.load.image('enemy', './assets/sprites/Enemy.png'); // this is the enemy sprite
 	}
 
-	create() {
-
+	create() {		
 		// This is the map that came with the boilerplate
-		var map:Phaser.Tilemaps.Tilemap = this.make.tilemap({ key: 'map' }); 
-		var tileset:Phaser.Tilemaps.Tileset = map.addTilesetImage('Desert');
-		var layer:Phaser.Tilemaps.StaticTilemapLayer = map.createStaticLayer(0, tileset, 0, 0);
+		// Note that the background must be the first thing to be added in create() as otherwise it will be infront of the other sprites
+		var background = this.add.image(0, 0, 'background');
+		background.setScale((window.innerWidth/ background.width)*2, (window.innerHeight/ background.height)*2);
 
-		this.player = this.add.sprite(100, 100, 'player');
+		this.player = this.add.sprite(window.innerWidth / 2, (window.innerHeight / 4) * 3, 'player');
 		this.player.setScale(0.25); // this shrinks the player sprite down to 25% of its original size
 
-		this.cursors = this.input.keyboard.createCursorKeys(); // this creates teh cursor keys
-    	this.keys = this.input.keyboard.addKeys("W,A,S,D"); // this is where I can assign certain keys to be used in the controls compoenent
+		this.enemy = this.add.sprite(200, 200, 'enemy');
 
-		this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-    	this.cameras.main.startFollow(this.player, false); // this makes the camera follow the player
+		this.cursors = this.input.keyboard.createCursorKeys(); // this creates teh cursor keys
+    	this.keys = this.input.keyboard.addKeys("W,A,S,D,T, SPACEBAR"); // this is where I can assign certain keys to be used in the controls compoenent
 	}
 
-	update(time: number, delta:number) {
+	update(time: number, delta:number) { // time is time, delta is the time from the last frame
 		controls(this.keys, this.cursors, this.player);
+		screenWrap(this.player);
 	}
 }

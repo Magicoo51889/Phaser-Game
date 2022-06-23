@@ -1,16 +1,27 @@
-export default function controls(keys, cursors, body) {
-  let forceMagnitude = 0.001;
-  let angularForceMagnitude = 0.05;
+import { Game, game } from "../main";
 
-  if (keys.W.isDown || cursors.up.isDown){
-    console.log(body)
-    this.body.setVelocity(forceMagnitude);
+export default function controls(keys, cursors, player) {
+  // let forceMagnitude = 1;
+  let angularForceMagnitude = 8;
 
-  }
+  // This might not be needed, but I'm leaving it here for now
+  // if (keys.W.isDown || cursors.up.isDown){
+  //   player.y += forceMagnitude
+  // }
+
+  // if (keys.SPACEBAR.isDown) {  // not yet implemented. But it will be the fire button to shoot. 
+  //   player.shoot();
+  // }
 
   if (keys.A.isDown || cursors.left.isDown){
-    this.body.setAngularVelocity(-angularForceMagnitude);
+    console.log("A")
+    player.x -= angularForceMagnitude
   } else if (keys.D.isDown || cursors.right.isDown){
-    this.body.setAngularVelocity(angularForceMagnitude);
+    console.log("D")
+    player.x += angularForceMagnitude
+  }
+  if (keys.T.isDown){
+    console.log("reset")
+    player.x = window.innerWidth / 2
   }
 }
