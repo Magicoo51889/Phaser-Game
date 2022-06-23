@@ -1,9 +1,9 @@
-export default function screenWrap (sprite, scene) { // when it goes to one edge it gets stuck as it is called every frame, so is always set at an edge. 
-    if (sprite.x <= 0){
-        sprite.x = scene.width;
+export default function screenWrap (sprite) { 
+    if (sprite.x < 0){
+        sprite.x = window.innerWidth;
         console.log("wrapping left")
     }
-    else if (sprite.x >= scene.width){
+    else if (sprite.x > window.innerWidth){
         sprite.x = 0;
         console.log("wrapping right")
     }

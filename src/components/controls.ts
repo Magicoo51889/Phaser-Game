@@ -1,3 +1,5 @@
+import { Game, game } from "../main";
+
 export default function controls(keys, cursors, player) {
   // let forceMagnitude = 1;
   let angularForceMagnitude = 8;
@@ -17,5 +19,9 @@ export default function controls(keys, cursors, player) {
   } else if (keys.D.isDown || cursors.right.isDown){
     console.log("D")
     player.x += angularForceMagnitude
+  }
+  if (keys.T.isDown){
+    console.log("reset")
+    player.x = window.innerWidth / 2
   }
 }
