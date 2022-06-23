@@ -5,7 +5,7 @@ import Planet_1 from './scenes/PlayScene';
 
 const config:GameConfig = {
     type: Phaser.AUTO,
-    parent: 'content',
+    parent: 'game',
     width: window.innerWidth, // the width and height is scaled to the window
     height: window.innerHeight,
     resolution: 1, 
@@ -29,6 +29,5 @@ export class Game extends Phaser.Game {
         super(config);
     }
 }
-window.onload = () => {
-    var game = new Game(config);
-};
+
+export const game = new Phaser.Game(config);
