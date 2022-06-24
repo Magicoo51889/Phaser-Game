@@ -25,7 +25,7 @@ export default class Planet_1 extends Phaser.Scene {
 	}
 	
 	preload() {
-		this.load.image('background', './assets/sprites/Sky.png');
+		this.load.image('background', './assets/sprites/Sky.png'); // this is the background image
 		this.load.image('player', './assets/sprites/SpaceShip.png'); // this is the space ship sprite
 		this.load.image('enemy', './assets/sprites/Enemy.png'); // this is the enemy sprite
 	}
