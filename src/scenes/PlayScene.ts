@@ -48,5 +48,7 @@ export default class Planet_1 extends Phaser.Scene {
 	update(time: number, delta:number) { // time is time, delta is the time from the last frame
 		controls(this.keys, this.cursors, this.player);
 		screenWrap(this.player);
+
+		// calls class with and updates each frame for movement
 	}
 }
