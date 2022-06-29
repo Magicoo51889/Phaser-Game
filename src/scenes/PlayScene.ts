@@ -1,11 +1,16 @@
 import controls from '../components/controls';
 import screenWrap from '../components/screenWrap';
+import Enemy from '../components/classes/enemy';
+
+export const PLAYER_CATEGORY = 0b0001;
+export const ENEMY_CATAGORY = 0b0010;
+export const PLAYER_LASERS_CATEGORY = 0b0100;
 
 export default class Planet_1 extends Phaser.Scene {
 	player: Phaser.GameObjects.Sprite;
-	enemy: Phaser.GameObjects.Sprite;
 	cursors: any;
 	keys: any;
+	private enemys?: Phaser.GameObjects.Group
 
 	public playerHealthPoints: number;
 	public enemyHealthPoints: number;
@@ -39,7 +44,17 @@ export default class Planet_1 extends Phaser.Scene {
 		this.player = this.add.sprite(window.innerWidth / 2, (window.innerHeight / 4) * 3, 'player');
 		this.player.setScale(0.25); // this shrinks the player sprite down to 25% of its original size
 
-		this.enemy = this.add.sprite(200, 200, 'enemy');
+		this.enemys = this.add.group({
+			classType: Enemy,
+			runChildUpdate: true
+		});
+
+		this.enemys.get(0,0, 'enemy');
+
+		this.enemys.children.each(child => {
+			const enemy = child as IEnemy
+			enemy.setTarget(this.player!)
+		})
 
 		this.cursors = this.input.keyboard.createCursorKeys(); // this creates the cursor keys
     	this.keys = this.input.keyboard.addKeys("W,A,S,D,T"); // this is where I can assign certain keys to be used in the controls compoenent
@@ -48,7 +63,7 @@ export default class Planet_1 extends Phaser.Scene {
 	update(time: number, delta:number) { // time is time, delta is the time from the last frame
 		controls(this.keys, this.cursors, this.player);
 		screenWrap(this.player);
-
+		
 		// calls class with and updates each frame for movement
 	}
 }
