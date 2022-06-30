@@ -1,7 +1,6 @@
 import controls from '../components/controls';
 import screenWrap from '../components/screenWrap';
 import Enemy from '../components/classes/enemy';
-import EnemyFn from '../components/classes/enemyfn';
 
 export const PLAYER_CATEGORY = 0b0001;
 export const ENEMY_CATAGORY = 0b0010;
