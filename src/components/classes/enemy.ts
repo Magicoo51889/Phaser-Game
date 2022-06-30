@@ -1,10 +1,7 @@
-import { ENEMY_CATAGORY, PLAYER_CATEGORY, PLAYER_LASERS_CATEGORY } from "../../scenes/PlayScene";
+import { ENEMY_CATAGORY, PLAYER_CATEGORY, PLAYER_LASERS_CATEGORY } from "../../scenes/PlayScene"; // this is the unique key of the objects for collisions
 import Phaser from "phaser";
 
-interface IEnemy {
-}
-
-export default class Enemy extends Phaser.GameObjects.Sprite implements IEnemy {
+export default class Enemy extends Phaser.GameObjects.Sprite {
     private target?: Phaser.GameObjects.Components.Transform;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string) {

@@ -1,6 +1,7 @@
 import controls from '../components/controls';
 import screenWrap from '../components/screenWrap';
 import Enemy from '../components/classes/enemy';
+import EnemyFn from '../components/classes/enemyfn';
 
 export const PLAYER_CATEGORY = 0b0001;
 export const ENEMY_CATAGORY = 0b0010;
@@ -44,17 +45,7 @@ export default class Planet_1 extends Phaser.Scene {
 		this.player = this.add.sprite(window.innerWidth / 2, (window.innerHeight / 4) * 3, 'player');
 		this.player.setScale(0.25); // this shrinks the player sprite down to 25% of its original size
 
-		this.enemys = this.add.group({
-			classType: Enemy,
-			runChildUpdate: true
-		});
-
-		this.enemys.get(0,0, 'enemy');
-
-		this.enemys.children.each(child => {
-			const enemy = child as IEnemy
-			enemy.setTarget(this.player!)
-		})
+		EnemyFn(window.innerWidth / 2, (window.innerHeight / 4) * 3, 'enemy', this.player);
 
 		this.cursors = this.input.keyboard.createCursorKeys(); // this creates the cursor keys
     	this.keys = this.input.keyboard.addKeys("W,A,S,D,T"); // this is where I can assign certain keys to be used in the controls compoenent
