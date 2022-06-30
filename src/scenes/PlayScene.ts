@@ -45,10 +45,19 @@ export default class Planet_1 extends Phaser.Scene {
 		this.player = this.add.sprite(window.innerWidth / 2, (window.innerHeight / 4) * 3, 'player');
 		this.player.setScale(0.25); // this shrinks the player sprite down to 25% of its original size
 
-		EnemyFn(window.innerWidth / 2, (window.innerHeight / 4) * 3, 'enemy', this.player);
+		const enemy1:Enemy = new Enemy(this, window.innerWidth / 2, window.innerHeight / 2, 'enemy');
+
+		let enemies: Enemy[] = []; // creates an array of enemies
+		enemies.push(enemy1);
+
+		this.add.sprite(window.innerWidth/2, window.innerHeight/2, enemies[0])
 
 		this.cursors = this.input.keyboard.createCursorKeys(); // this creates the cursor keys
-    	this.keys = this.input.keyboard.addKeys("W,A,S,D,T"); // this is where I can assign certain keys to be used in the controls compoenent
+    	this.keys = this.input.keyboard.addKeys("W,A,S,D,T"); // this is where I can assign certain keys to be used in the controls component
+		this.cameras.main.setBounds(0, 0, window.innerWidth, window.innerHeight); // this sets the bounds of the camera
+        this.cameras.main.startFollow(this.player, false);
+
+		
 	}
 
 	update(time: number, delta:number) { // time is time, delta is the time from the last frame

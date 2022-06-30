@@ -20,7 +20,7 @@ const config:GameConfig = {
         }
     },
     scene: [
-      Planet_1
+        Planet_1
     ]
 };
 
@@ -30,4 +30,4 @@ export class Game extends Phaser.Game {
     }
 }
 
-export const game = new Phaser.Game(config);
+export const game: Phaser.Game = new Phaser.Game(config);
