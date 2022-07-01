@@ -3,17 +3,18 @@ import Phaser from "phaser";
 
 export default class Enemy extends Phaser.GameObjects.Sprite {
     private target?: Phaser.GameObjects.Components.Transform;
-    scene: Phaser.Scene;
+    scene: any;
 
-    constructor(scene: Phaser.Scene, x: number, y: number, texture: string, health: number) {
+    constructor(scene, x: number, y: number, texture: string, health: number) {
         super(scene, 0, 0, texture);
-        this.scene = scene;
+        this.scene.add.existing(this);
+        this.x = x
+        this.y = y
     }
 
     create(texture: string) {
-        this.scene.add.image(0, 0, texture);
-        console.log("enemy created");
-
+        this.scene.add.image(this.x, this.y, texture);
+        console.log("enemy created as " + texture);
     }
 
     set_Target(target: Phaser.GameObjects.Components.Transform) {
