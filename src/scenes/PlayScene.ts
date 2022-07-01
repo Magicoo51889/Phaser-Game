@@ -44,7 +44,7 @@ export default class Planet_1 extends Phaser.Scene {
 		this.player = this.add.sprite(window.innerWidth / 2, (window.innerHeight / 4) * 3, 'player');
 		this.player.setScale(0.25); // this shrinks the player sprite down to 25% of its original size
 
-		const enemy1:Enemy = new Enemy(this, window.innerWidth / 2, window.innerHeight / 2, 'enemy');
+		const enemy1:Enemy = new Enemy(this, window.innerWidth / 2, window.innerHeight / 2, 'enemy', 100);
 
 		let enemies: Enemy[] = []; // creates an array of enemies
 		enemies.push(enemy1);

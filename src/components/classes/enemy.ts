@@ -5,7 +5,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     private target?: Phaser.GameObjects.Components.Transform;
     scene: Phaser.Scene;
 
-    constructor(scene: Phaser.Scene, x: number, y: number, texture: string) {
+    constructor(scene: Phaser.Scene, x: number, y: number, texture: string, health: number) {
         super(scene, 0, 0, texture);
         this.scene = scene;
     }
