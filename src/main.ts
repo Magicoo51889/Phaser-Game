@@ -1,7 +1,7 @@
 import 'phaser';
 
 // game scenes
-import Planet_1 from './scenes/PlayScene';
+import Planet_1 from './scenes/playScene';
 
 const config:GameConfig = {
     type: Phaser.AUTO,
