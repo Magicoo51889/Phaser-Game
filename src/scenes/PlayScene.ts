@@ -48,6 +48,7 @@ export default class Planet_1 extends Phaser.Scene {
 		// load enemy class and image
 		this.enemy1 = new Enemy(this, window.innerWidth / 2, (window.innerHeight / 4), 'enemy', 100);
 		this.enemy1.create('enemy');
+		this.enemy1.set_Target(this.player);
 
 		console.log("x: " + this.enemy1.x);
 		console.log("y: " +this.enemy1.y);
@@ -67,3 +68,6 @@ export default class Planet_1 extends Phaser.Scene {
 		// calls class with and updates each frame for movement
 	}
 }
+
+// Useful links:
+// - https://github.com/photonstorm/phaser-examples/blob/master/examples/games/invaders.js

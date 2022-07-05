@@ -2,6 +2,7 @@ import Phaser from "phaser";
 
 export default class Enemy extends Phaser.GameObjects.Sprite {
     scene: Phaser.Scene;
+    private target?: Phaser.GameObjects.Components.Transform;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string, health: number) {
         super(scene, 0, 0, texture, health);
@@ -15,16 +16,22 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
         console.log("enemy loaded with the texture of: " + texture);
     }
 
-    update(target) {
+    set_Target(target: Phaser.GameObjects.Components.Transform) {
+        this.target = target;
+    }
+
+    update() {
+        console.log("finding target");
+
         // points towards the player
-        if (!target){
+        if (!this.target){
             console.log("no target");
             return
         }
         
         console.log("target found");
-        const tx = target.x
-        const ty = target.y
+        const tx = this.target.x
+        const ty = this.target.y
         const x = this.x
         const y = this.y
         const rotation = Phaser.Math.Angle.Between(x, y, tx, ty)
