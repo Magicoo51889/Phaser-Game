@@ -48,7 +48,6 @@ export default class Planet_1 extends Phaser.Scene {
 		// load enemy class and image
 		this.enemy1 = new Enemy(this, window.innerWidth / 2, (window.innerHeight / 4), 'enemy', 100);
 		this.enemy1.create('enemy');
-		this.enemy1.set_Target(this.player);
 
 		console.log("x: " + this.enemy1.x);
 		console.log("y: " +this.enemy1.y);
@@ -63,10 +62,10 @@ export default class Planet_1 extends Phaser.Scene {
 	update(time: number, delta:number) { // time is time, delta is the time from the last frame
 		controls(this.keys, this.cursors, this.player);
 		screenWrap(this.player);
-		this.enemy1.update(this.player);
+		this.enemy1.update(this.player); // doesn't update the image of the enemy
 		
-		// calls class with and updates each frame for movement
 	}
+
 }
 
 // Useful links:
