@@ -1,6 +1,7 @@
 import controls from '../components/controls';
 import screenWrap from '../components/screenWrap';
 import Enemy from '../components/classes/enemy';
+import Player from '../components/classes/player';
 
 // unique identifiers for each object that needs to collide
 export const PLAYER_CATEGORY = 0b0001;
@@ -8,7 +9,7 @@ export const ENEMY_CATAGORY = 0b0010;
 export const PLAYER_LASERS_CATEGORY = 0b0100;
 
 export default class Planet_1 extends Phaser.Scene {
-	player: Phaser.GameObjects.Sprite;
+	player: any;
 	cursors: any;
 	keys: any;
 	enemy1: any;
@@ -42,15 +43,15 @@ export default class Planet_1 extends Phaser.Scene {
 		var background = this.add.image(0, 0, 'background');
 		background.setScale((window.innerWidth/ background.width)*2, (window.innerHeight/ background.height)*2);
 
-		this.player = this.add.sprite(window.innerWidth / 2, (window.innerHeight / 4) * 3, 'player');
-		this.player.setScale(0.25); // this shrinks the player sprite down to 25% of its original size
+		this.player = new Player(this, window.innerWidth / 2, (window.innerHeight / 4) * 3, 'player')
+		this.player.create('player', this);
 			
 		// load enemy class and image
-		this.enemy1 = new Enemy(this, window.innerWidth / 2, (window.innerHeight / 4), 'enemy', 100);
-		this.enemy1.create('enemy');
+		this.enemy1 = new Enemy(this, window.innerWidth / 2, (window.innerHeight / 4), 'enemy');
+		this.enemy1.create('enemy', this);
 
 		console.log("x: " + this.enemy1.x);
-		console.log("y: " +this.enemy1.y);
+		console.log("y: " + this.enemy1.y);
 
 		this.cursors = this.input.keyboard.createCursorKeys(); // this creates the cursor keys
     	this.keys = this.input.keyboard.addKeys("W,A,S,D,T"); // this is where I can assign certain keys to be used in the controls component
@@ -62,7 +63,6 @@ export default class Planet_1 extends Phaser.Scene {
 	update(time: number, delta:number) { // time is time, delta is the time from the last frame
 		controls(this.keys, this.cursors, this.player);
 		screenWrap(this.player);
-		this.enemy1.update(this.player); // doesn't update the image of the enemy
 		
 	}
 
