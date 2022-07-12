@@ -1,40 +1,27 @@
-import { ENEMY_CATAGORY, PLAYER_CATEGORY, PLAYER_LASERS_CATEGORY } from "../../scenes/PlayScene"; // this is the unique key of the objects for collisions
-import Phaser from "phaser";
+import Phaser from 'phaser';
+import Entity from './entity'
 
-export default class Enemy extends Phaser.GameObjects.Sprite {
-    private target?: Phaser.GameObjects.Components.Transform;
-    scene: Phaser.Scene;
+export default class Enemy extends Entity{
+    scene:Phaser.Scene;
 
-    constructor(scene: Phaser.Scene, x: number, y: number, texture: string) {
-        super(scene, 0, 0, texture);
+    constructor(scene:Phaser.Scene, x:number, y:number, texture:string){
+        super(scene, x, y, texture);
+        this.x = x;
+        this.y = y;
         this.scene = scene;
     }
 
-    create(texture: string) {
-        this.scene.add.image(0, 0, texture);
-        console.log("enemy created");
+    create(texture){
+        this.setScale(0.5);
+        this.setOrigin(0,0.5);
+        console.log("Enemy texture loaded as: " + texture);
 
+        //moves enemy side to side
+        //let tween = this.scene.add.tween(this).to({x: this.x + 100}, 1000, Phaser.Math.Easing.Linear, true, 0, 1000, true);
+        //tween.onLoop.add(this.descend, this);
     }
 
-    set_Target(target: Phaser.GameObjects.Components.Transform) {
-        this.target = target;
-        console.log("finding target");
-    }
-
-    update() {
-        // points towards the player
-        if (!this.target){
-            console.log("no target");
-            return
-        }
-        
-        console.log("target found");
-        const tx = this.target.x
-        const ty = this.target.y
-        const x = this.x
-        const y = this.y
-        const rotation = Phaser.Math.Angle.Between(x, y, tx, ty)
-        this.setRotation(rotation)
-        console.log("rotating to " + rotation);
+    descend() {
+        this.y += 10;
     }
 }

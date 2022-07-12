@@ -1,5 +1,5 @@
 export default function controls(keys, cursors, player) {
-  let angularForceMagnitude = 11;
+  let angularForceMagnitude = 10;
 
   // Could implement a sensitivity feature so that people can select what they prefer
 
