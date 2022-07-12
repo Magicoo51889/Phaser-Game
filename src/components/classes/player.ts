@@ -12,10 +12,10 @@ export default class Player extends Entity{
     }
 
     create(texture){
-        this.scene.add.sprite(this.x, this.y, texture);
+        //this.scene.add.sprite(this.x, this.y, texture);
         this.setScale(0.25);
         this.setOrigin(0,0.5);
-        console.log("player loaded with the texture of: " + this.texture);
+        console.log("Player texture loaded as: " + texture);
 		
     }
 }

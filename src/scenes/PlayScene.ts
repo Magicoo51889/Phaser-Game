@@ -42,14 +42,13 @@ export default class Planet_1 extends Phaser.Scene {
 		var background = this.add.image(0, 0, 'background');
 		background.setScale((window.innerWidth/ background.width)*2, (window.innerHeight/ background.height)*2);
 
+		// load player class and create player
 		this.player = new Player(this, window.innerWidth / 2, (window.innerHeight / 4) * 3, 'player')
 		this.player.create('player');
-		console.log(this.player);
 		
-		// load enemy class and image
+		// load enemy class and create enemy
 		this.enemy1 = new Enemy(this, window.innerWidth / 2, (window.innerHeight / 4), 'enemy');
 		this.enemy1.create('enemy');
-		console.log(this.enemy1);
 
 		console.log("x: " + this.enemy1.x);
 		console.log("y: " + this.enemy1.y);
@@ -57,7 +56,6 @@ export default class Planet_1 extends Phaser.Scene {
 		this.cursors = this.input.keyboard.createCursorKeys(); // this creates the cursor keys
     	this.keys = this.input.keyboard.addKeys("W,A,S,D,T"); // this is where I can assign certain keys to be used in the controls component
 		this.cameras.main.setBounds(0, 0, window.innerWidth, window.innerHeight); // this sets the bounds of the camera
-        this.cameras.main.startFollow(this.player, false);
 
 	}
 
