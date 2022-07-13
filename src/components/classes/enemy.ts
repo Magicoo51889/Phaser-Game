@@ -11,7 +11,7 @@ export default class Enemy extends Entity{
         this.scene = scene;
     }
 
-    create(texture){
+    create(texture){ // this is the method that is called so the enemy is created properly
         this.setScale(0.5);
         this.setOrigin(0,0.5);
         console.log("Enemy texture loaded as: " + texture);
