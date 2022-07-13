@@ -2,13 +2,6 @@ import controls from '../components/controls';
 import screenWrap from '../components/screenWrap';
 import Enemy from '../components/classes/enemy';
 import Player from '../components/classes/player';
-import Entity from '../components/classes/entity';
-
-// unique identifiers for each object that needs to collide
-export const PLAYER_CATEGORY = 0b0001;
-export const ENEMY_CATAGORY = 0b0010;
-export const PLAYER_LASERS_CATEGORY = 0b0100;
-
 export default class Planet_1 extends Phaser.Scene {
 	player: any;
 	cursors: any;
@@ -26,7 +19,6 @@ export default class Planet_1 extends Phaser.Scene {
 	init() {
 		this.playerHealthPoints = 100; // this is the player's health in percentage points
 		this.enemyHealthPoints = 100; // this is the enemy's health in percentage points
-
 		this.enemiesRemaining = 3; // this is the number of enemies remaining in the level
 	}
 	
@@ -37,7 +29,6 @@ export default class Planet_1 extends Phaser.Scene {
 	}
 
 	create() {
-		// This is the map that came with the boilerplate
 		// Note that the background must be the first thing to be added in create() as otherwise it will be infront of the other sprites
 		var background = this.add.image(0, 0, 'background');
 		background.setScale((window.innerWidth/ background.width)*2, (window.innerHeight/ background.height)*2);
@@ -64,7 +55,6 @@ export default class Planet_1 extends Phaser.Scene {
 		screenWrap(this.player);
 		
 	}
-
 }
 
 // Useful links:
