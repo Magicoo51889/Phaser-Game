@@ -1,12 +1,15 @@
-import controls from '../components/controls';
-import screenWrap from '../components/screenWrap';
+import controls from '../components/mechanics/controls';
+import screenWrap from '../components/mechanics/screenWrap';
 import Enemy from '../components/classes/enemy';
 import Player from '../components/classes/player';
+
+let lasers;
 export default class Planet_1 extends Phaser.Scene {
 	player: any;
 	cursors: any;
 	keys: any;
 	enemy1: any;
+	lasers: any;
 
 	public playerHealthPoints: number;
 	public enemyHealthPoints: number;
@@ -26,6 +29,7 @@ export default class Planet_1 extends Phaser.Scene {
 		this.load.image('background', './assets/sprites/Sky.png'); // this is the background image
 		this.load.image('player', './assets/sprites/SpaceShip.png'); // this is the space ship sprite
 		this.load.image('enemy', './assets/sprites/Enemy.png'); // this is the enemy sprite
+		this.load.image('laser', './assets/Laser.png'); // this is the laser image
 	}
 
 	create() {
@@ -47,6 +51,11 @@ export default class Planet_1 extends Phaser.Scene {
 		this.cursors = this.input.keyboard.createCursorKeys(); // this creates the cursor keys
     	this.keys = this.input.keyboard.addKeys("W,A,S,D,T"); // this is where I can assign certain keys to be used in the controls component
 		this.cameras.main.setBounds(0, 0, window.innerWidth, window.innerHeight); // this sets the bounds of the camera
+
+		// creating lasers
+		lasers = this.add.group();
+		lasers.enableBody = true;
+		lasers.createMultiple(10, 'laser');
 
 	}
 
