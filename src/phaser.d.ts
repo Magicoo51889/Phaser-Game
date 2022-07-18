@@ -9800,7 +9800,7 @@ declare namespace Phaser {
              * @param children [description]
              * @param config [description]
              */
-            group(children: any[] | object, config?: object): Phaser.GameObjects.Group;
+            group(children?: any[] | object, config?: object): Phaser.GameObjects.Group;
 
             /**
              * Creates a new Image Game Object and adds it to the Scene.

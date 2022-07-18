@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import Entity from './entity'
 
+let lasers;
 export default class Enemy extends Entity{
     scene:Phaser.Scene;
 
@@ -23,5 +24,11 @@ export default class Enemy extends Entity{
 
     descend() {
         this.y += 10;
+    }
+
+    lasers(lasers_texture:string){
+        lasers = this.scene.add.group();
+		lasers.enableBody = true;
+		lasers.createMultiple(10, lasers_texture);
     }
 }

@@ -53,9 +53,7 @@ export default class Planet_1 extends Phaser.Scene {
 		this.cameras.main.setBounds(0, 0, window.innerWidth, window.innerHeight); // this sets the bounds of the camera
 
 		// creating lasers
-		lasers = this.add.group();
-		lasers.enableBody = true;
-		lasers.createMultiple(10, 'laser');
+		this.enemy1.lasers('lasers');
 
 	}
 

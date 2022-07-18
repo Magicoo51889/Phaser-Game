@@ -1,5 +1,10 @@
 export default function controls(keys, cursors, player) {
-  let angularForceMagnitude = 10;
+
+  // I will add these as options in the menu and pause menu so that people can select different sensitivites. 
+  let lowSens = 60;
+  let normSens = 90;
+  let hiSens = 120;
+  let angularForceMagnitude = window.innerWidth / normSens;
 
   // Could implement a sensitivity feature so that people can select what they prefer
 
