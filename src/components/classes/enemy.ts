@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import Entity from './entity'
 
 let lasers;
+
 export default class Enemy extends Entity{
     scene:Phaser.Scene;
 
@@ -18,17 +19,28 @@ export default class Enemy extends Entity{
         console.log("Enemy texture loaded as: " + texture);
 
         //moves enemy side to side
-        //let tween = this.scene.add.tween(this).to({x: this.x + 100}, 1000, Phaser.Math.Easing.Linear, true, 0, 1000, true);
-        //tween.onLoop.add(this.descend, this);
     }
 
     descend() {
         this.y += 10;
     }
 
-    lasers(lasers_texture:string){
-        lasers = this.scene.add.group();
-		lasers.enableBody = true;
-		lasers.createMultiple(10, lasers_texture);
+    // creates lasers for the enemy
+
+    // lasers(lasers_texture:string){
+    //     lasers = this.scene.add.group();
+	// 	lasers.enableBody = true;
+	// 	lasers.createMultiple(10, enemy_lasers_texture);
+    // }
+    update(timestamp?: any, delta?: any): void {
+        let speed = 100;
+        const LEFT = 0;
+        const RIGHT = window.innerWidth;
+
+        if (this.x < LEFT) {
+            this.x =+ (speed);
+          } else if (this.x > RIGHT) {
+            this.x =+(-speed);
+          }
     }
 }

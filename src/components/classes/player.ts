@@ -1,6 +1,8 @@
 import Phaser from 'phaser';
 import Entity from './entity';
 
+let lasers;
+
 export default class Player extends Entity{
     scene:Phaser.Scene;
 
@@ -16,5 +18,11 @@ export default class Player extends Entity{
         this.setOrigin(0,0.5);
         console.log("Player texture loaded as: " + texture);
 		
+    }
+
+    lasers(player_lasers_texture:string){
+        lasers = this.scene.add.group();
+		lasers.enableBody = true;
+		lasers.createMultiple(10, player_lasers_texture);
     }
 }

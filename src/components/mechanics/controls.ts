@@ -1,3 +1,6 @@
+let bullets
+let bulletTime = 0;
+
 export default function controls(keys, cursors, player) {
 
   // I will add these as options in the menu and pause menu so that people can select different sensitivites. 
@@ -15,9 +18,24 @@ export default function controls(keys, cursors, player) {
   } else if (keys.D.isDown || cursors.right.isDown){
     console.log("D")
     player.x += angularForceMagnitude  // adds the angular force to the player's x position
-  }
-  if (keys.T.isDown){
-    console.log("reset")
-    player.x = window.innerWidth / 2  // resets the player's x position to the center of the screen
-  }
+  } else if (keys.W.isDown || cursors.up.isDown){
+    //fireBullet();
+    console.log("Shooting")
+}
+
+// function fireBullet() {
+//   if (this.scene.time.now > bulletTime){
+//     laser = bullets.getFirstExists(false);
+  
+
+//     if (laser){
+//       laser.reset(player.x, player.y + 8);
+//       laser.setVelocityY(-300);
+//       bulletTime = this.scene.time.now + 200;
+//     }
+//   }
+// }
+
+// function resetBullet(laser) {
+//   laser.kill();
 }

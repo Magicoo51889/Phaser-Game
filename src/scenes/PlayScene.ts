@@ -4,6 +4,9 @@ import Enemy from '../components/classes/enemy';
 import Player from '../components/classes/player';
 
 let lasers;
+
+
+
 export default class Planet_1 extends Phaser.Scene {
 	player: any;
 	cursors: any;
@@ -18,7 +21,6 @@ export default class Planet_1 extends Phaser.Scene {
 	constructor() {
     	super({key: 'Planet_1'}); // this is the unique key of the scene for the main scene manager
 	}
-
 	init() {
 		this.playerHealthPoints = 100; // this is the player's health in percentage points
 		this.enemyHealthPoints = 100; // this is the enemy's health in percentage points
@@ -49,17 +51,17 @@ export default class Planet_1 extends Phaser.Scene {
 		console.log("y: " + this.enemy1.y);
 
 		this.cursors = this.input.keyboard.createCursorKeys(); // this creates the cursor keys
-    	this.keys = this.input.keyboard.addKeys("W,A,S,D,T"); // this is where I can assign certain keys to be used in the controls component
+    	this.keys = this.input.keyboard.addKeys("W,A,S,D"); // this is where I can assign certain keys to be used in the controls component
 		this.cameras.main.setBounds(0, 0, window.innerWidth, window.innerHeight); // this sets the bounds of the camera
 
 		// creating lasers
-		this.enemy1.lasers('lasers');
-
+		this.player.lasers('lasers');
 	}
 
 	update(time: number, delta:number) { // time is time, delta is the time from the last frame
 		controls(this.keys, this.cursors, this.player);
 		screenWrap(this.player);
+		this.enemy1.update();
 		
 	}
 }
