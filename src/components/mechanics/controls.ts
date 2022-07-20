@@ -4,9 +4,9 @@ let bulletTime = 0;
 export default function controls(keys, cursors, player) {
 
   // I will add these as options in the menu and pause menu so that people can select different sensitivites. 
-  let lowSens = 60;
+  let lowSens = 120;
   let normSens = 90;
-  let hiSens = 120;
+  let hiSens = 60;
   let angularForceMagnitude = window.innerWidth / normSens;
 
   // Could implement a sensitivity feature so that people can select what they prefer

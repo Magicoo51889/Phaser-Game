@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import Entity from './entity'
 
 let lasers;
-
+let timedEvent;
 export default class Enemy extends Entity{
     scene:Phaser.Scene;
 
@@ -32,15 +32,11 @@ export default class Enemy extends Entity{
 	// 	lasers.enableBody = true;
 	// 	lasers.createMultiple(10, enemy_lasers_texture);
     // }
-    update(timestamp?: any, delta?: any): void {
-        let speed = 100;
-        const LEFT = 0;
-        const RIGHT = window.innerWidth;
-
-        if (this.x < LEFT) {
-            this.x =+ (speed);
-          } else if (this.x > RIGHT) {
-            this.x =+(-speed);
-          }
+    update(timestamp: any, delta: any): void {
+        const LEFT:number = 0;
+        const RIGHT:number = window.innerWidth;
+        
+        this.scene.tweens.add(this).to({x:LEFT}, 2000, Phaser.Easing.Linear.None, true, 0, -1);
+        console.log(this.x)
     }
 }
