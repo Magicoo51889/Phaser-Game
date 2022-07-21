@@ -11,8 +11,8 @@ const config:GameConfig = {
     resolution: 1, 
     backgroundColor: "#fcfff2", // this is a cream background
     physics: {
-        default: 'matter',
-        matter: {
+        default: 'arcade',
+        arcade: {
             gravity: {
                 y: 0
             },

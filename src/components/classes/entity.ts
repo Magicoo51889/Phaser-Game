@@ -5,4 +5,4 @@ export default class Entity extends Phaser.GameObjects.Sprite{
         super(scene, x, y, texture);
         scene.add.existing(this); // this adds the class that's extended to the scene
     }
-}
+} 

@@ -1,5 +1,4 @@
 import Phaser from 'phaser';
-import { game } from '../../main';
 import Entity from './entity'
 
 let lasers;
@@ -36,9 +35,7 @@ export default class Enemy extends Entity{
     update(timestamp: any, delta: any): void {
         const LEFT:number = 0;
         const RIGHT:number = window.innerWidth;
-        let speed = 10;
         
-        let tween = this.tweens.add(this).to({x: +speed}, 2000, Phaser.Easing.Linear.None, true, 0, -1);
-        console.log(this.x)
+        this.setVelocity(0, 100);
     }
 }

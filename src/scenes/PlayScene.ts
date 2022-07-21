@@ -59,10 +59,11 @@ export default class Planet_1 extends Phaser.Scene {
 	update(time: number, delta:number) { // time is time, delta is the time from the last frame
 		controls(this.keys, this.cursors, this.player);
 		screenWrap(this.player);
-		this.enemy1.update(3, 4);
+		this.enemy1.update();
 		
 	}
 }
 
 // Useful links:
 // - https://github.com/photonstorm/phaser-examples/blob/master/examples/games/invaders.js
+
