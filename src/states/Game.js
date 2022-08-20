@@ -35,17 +35,17 @@ function preload() {
   let mouseClick;
   let leftKey;
   let rightKey;
-  game.load.image('background', 'assets/spacebg.gif');
+  game.load.image('background', 'assets/images/spacebg.gif');
   //player ship
-  game.load.image('playerShip', 'assets/spaceship.png');
+  game.load.image('playerShip', 'assets/images/spaceship.png');
   //enemy ship
-  game.load.image('enemyShip', 'assets/enemy.png');
+  game.load.image('enemyShip', 'assets/images/enemy.png');
   //special enemy ship
-  game.load.image('specialEnemy', 'assets/newEnemyShip.png');
+  game.load.image('specialEnemy', 'assets/images/newEnemyShip.png');
   //player shot
-  game.load.image('laser', 'assets/shot.png');
+  game.load.image('laser', 'assets/images/shot.png');
   //health pickup
-  game.load.image('healthPickup', 'assets/heart2.png');
+  game.load.image('healthPickup', 'assets/images/heart2.png');
   //explosion
   game.load.spritesheet('explosion', 'assets/explosion3.png', 32, 32);
   //sounds
@@ -82,6 +82,7 @@ function create() {
   //set player to playerShip
   //set player to game.add.sprite to enable body physics
   player = game.add.sprite(game.canvas.width / 2, game.canvas.height - 100, 'playerShip');
+  player.scale.set(0.25);
   game.physics.arcade.enable(player, Phaser.Physics.ARCADE); //set player physics
   player.body.collideWorldBounds = true; //player cannot leave world bounds
   player.body.bounce.setTo(1);
@@ -117,6 +118,7 @@ function create() {
   enemies.enableBody = true;
   game.physics.arcade.enable(enemies, Phaser.Physics.ARCADE);
   enemies.createMultiple(500, 'enemyShip');
+  enemies.scale.set(0.5);
   enemies.setAll('anchor.x', 0.5);
   enemies.setAll('anchor.y', 0.5);
 
