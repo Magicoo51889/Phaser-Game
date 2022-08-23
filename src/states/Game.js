@@ -25,9 +25,7 @@ let health = 200;
 
 // Loads all assets
 function preload() {
-  let mouseClick;
-  let leftKey;
-  let rightKey;
+  // Load all assets
   game.load.image('background', 'assets/images/spacebg.gif');
   // Player ship
   game.load.image('playerShip', 'assets/images/playerShip.gif');
@@ -48,6 +46,7 @@ function preload() {
   game.load.audio('enemySplode', 'assets/enemyExplode.wav');
   game.load.audio('healthGet', 'assets/healthSound.wav');
   game.load.audio('playerDie', 'assets/playerDie.wav');
+  game.load.audio('gamePlay', 'assets/GamePlaySoundTrack.mp3');
 }
 
 // This function holds all the game logic
@@ -60,8 +59,8 @@ function create() {
   background.scale.y = 2;
   //set keys to keyboard input
 
-  game.leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
-  game.rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+  game.leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT) && game.input.keyboard.addKey(Phaser.Keyboard.A);
+  game.rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT) && game.input.keyboard.addKey(Phaser.Keyboard.D);
 
   //set player to playerShip
   //set player to game.add.sprite to enable body physics
@@ -76,7 +75,6 @@ function create() {
   player.body.velocity.x = 200; //set default x velocity to 200
 
   // Create enemy lasers
-
   lasers = game.add.group(); //create group of lasers
   lasers.enableBody = true;
   game.physics.arcade.enable(lasers, Phaser.Physics.ARCADE);
@@ -315,17 +313,6 @@ const healthText = document.querySelector('#health');
 function takeDamage(player, enemy, specialEnemy) {
   let playerDeath = game.add.sound('playerDie');
   playerDeath.play();
-  const dogImage = document.querySelector('.player-image');
-  dogImage.classList.add('saturate');
-  setInterval(function() {
-    dogImage.classList.remove('saturate');
-  }, 100);
-  setInterval(function() {
-    dogImage.classList.add('saturate');
-  }, 200);
-  setInterval(function() {
-    dogImage.classList.remove('saturate');
-  }, 100);
   enemy.kill();
   health -= 100;
   healthText.innerHTML = `Health: ${health}`;
