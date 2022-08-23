@@ -1,8 +1,4 @@
-/**
- * Galaxy Dawg, a Space Invader inspired top-down space shooter
- */
-
-//create game
+// Create game
 
 const game = new Phaser.Game(400, 730, Phaser.AUTO, 'game-wrapper', {
   preload: preload,
@@ -13,24 +9,21 @@ const game = new Phaser.Game(400, 730, Phaser.AUTO, 'game-wrapper', {
 let player;
 let healthPickup;
 let background;
-let laser; //to hold players laser shots
+let laser; // To hold each laser
 let lasers;
 let laserTime = 0;
-let enemies; //to hold all the enemies
-let specialEnemies; //hold special enemies
+let enemies; // To hold all the enemies
+let specialEnemies; // To hold special enemies
 let score = 0;
 
 let newHighscore = 0;
 if (localStorage.getItem('High-Score')) {
-  newHighscore = localStorage.getItem('High-Score'); //use local storage to save highscore
+  newHighscore = localStorage.getItem('High-Score'); // Use local storage to save highscore
 }
 const scoreText = document.querySelector('.score');
 let health = 200;
 
-/******************
- *
- * preload function preloads all the games assets
- * */
+// Loads all assets
 function preload() {
   let mouseClick;
   let leftKey;
@@ -55,18 +48,7 @@ function preload() {
   game.load.audio('playerDie', 'assets/playerDie.wav');
 }
 
-/*****************************************
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *  function create holds all the game logic
- * */
+// This funciton holds all the game logic
 
 function create() {
   game.physics.startSystem(Phaser.Physics.ARCADE); //add physics engine
@@ -91,9 +73,7 @@ function create() {
   player.x = game.input.x || game.world.width * 0.5; //player starts in middle of screen
   player.body.velocity.x = 200; //set default x velocity to 200
 
-  /**
-   * create player laser bullet
-   */
+  // Create enemy lasers
 
   lasers = game.add.group(); //create group of lasers
   lasers.enableBody = true;
@@ -106,13 +86,10 @@ function create() {
   lasers.setAll('outOfBoundsKill', true);
   lasers.setAll('checkWorldBounds', true);
 
-  /**
-   * Create enemies
-   */
+  // Create enemies
 
-  //make enemy shoot bullet
-  //create enemy class to define several features ****
-  // enemy movement and make enemy fire at random intervals
+  // Make enemy shoot lasers
+  // Enemy movement and make enemy fire at random intervals
 
   enemies = game.add.group();
   enemies.enableBody = true;
@@ -128,9 +105,8 @@ function create() {
 
   deployEnemyShips();
 
-  /**
-   * Create special more difficult enemy
-   */
+  // Create special enemies (bosses)
+
   specialEnemies = game.add.group();
   specialEnemies.enableBody = true;
   game.physics.arcade.enable(specialEnemies, Phaser.Physics.ARCADE);
@@ -148,23 +124,9 @@ function create() {
   }, 5000);
 }
 
-/*****************************************
- *
- *
- *
- *
- *
- *
- *
- *
- *  update function holds code on updating game objects
- * */
-function update() {
-  /**
-   *
-   *
-   */
+// update function changes each frame
 
+function update() {
   if (game.input.activePointer.isDown) {
     playerMovement();
   }
@@ -199,14 +161,14 @@ function update() {
   }
 }
 
-/*********************
- * function fireLaser
- * first if statement checks if previous laser fired time has elapsed enough
- * laser is set to first laser in lasers group
- * second if condition sets position of laser to player body
- * velocity is set to shoot out laser
- * set laserTime to current time + 200 so player cannot shoot laser rapidly
- */
+
+// Function fireLaser
+// First if statement checks if previous laser fired time has elapsed enough
+// Laser is set to first laser in lasers group
+// Second if condition sets position of laser to player body
+// Velocity is set to shoot out laser
+// Set laserTime to current time + 200 so player cannot shoot laser rapidly
+
 function fireLaser() {
   if (game.time.now > laserTime) {
     laser = lasers.getFirstExists(false);
@@ -221,10 +183,9 @@ function fireLaser() {
   }
 }
 
-/**
- *
- * Function deployEnemies adds enemies to the game space
- */
+
+// Function deployEnemies adds enemies to the game space
+
 let switchXSpawn = 0;
 let switchToNewPattern = 0;
 let enemyXSpawn = 200;
@@ -299,10 +260,11 @@ function deployEnemyShips() {
     }
   }
 }
+
 let specialCount = 0;
 let specialEnemyXSpawn = 200;
 function deploySpecialEnemy() {
-  //figure out how to get rid of normal enemies while special enemy is in play
+  // Figure out how to get rid of normal enemies while special enemy is in play
   if (spawnSpecialEnemy) {
     let specialEnemy = specialEnemies.getFirstExists(false);
 
@@ -328,11 +290,7 @@ function deploySpecialEnemy() {
   }
 }
 
-/******************
- *
- * function destroyEnemy kills the laser and enemy upon
- * collision between the two
- */
+// Function destroyEnemy kills the laser and enemy upon collison
 function destroyEnemy(enemy, laser) {
   enemy.kill();
   laser.kill();
@@ -345,9 +303,9 @@ function destroyEnemy(enemy, laser) {
   soundExplode.play();
 }
 
-//Function increaseScore increass the players score by 50
+//Function increaseScore increases the players score by 10
 function increaseScore() {
-  score += 50;
+  score += 10;
   scoreText.innerHTML = `Score: ${score}`;
   if (score > newHighscore) {
     newHighscore = score;
@@ -357,7 +315,7 @@ function increaseScore() {
   localStorage.setItem('High-Score', newHighscore); //set highscore in local storage
 }
 
-//Function takeDamage reduces the players health on collision with enemy
+//Function takeDamage reduces the players health on collision with an enemy
 const healthText = document.querySelector('#health');
 function takeDamage(player, enemy, specialEnemy) {
   let playerDeath = game.add.sound('playerDie');
