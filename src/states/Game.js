@@ -32,15 +32,15 @@ function preload() {
   // Enemy ship
   game.load.image('enemyShip', 'assets/images/enemy.png');
   // Special enemy ship
-  game.load.image('specialEnemy', 'assets/images/newEnemyShip.png');
+  game.load.image('specialEnemy', 'assets/images/newEnemyShip.gif');
   // Player shot
   game.load.image('laser', 'assets/images/shot.png');
   // Health pickup
   game.load.image('healthPickup', 'assets/images/heart2.gif');
   // Explosion
-  game.load.image('explosion', 'assets/explosion3.gif');
+  game.load.spritesheet('explosion', 'assets/images/explosion3.png', 32, 32);
   // Emotional support alien
-  game.load.image('emotionalSupportAlien', 'assets/images/emotionalSupportAlien.gif');
+  game.load.spritesheet('emotionalSupportAlien', 'assets/images/emotionalSupportAlien.png', 35, 55);
   // Sounds
   game.load.audio('laserBlast', 'assets/laserNoise.wav');
   game.load.audio('enemySplode', 'assets/enemyExplode.wav');
@@ -57,10 +57,17 @@ function create() {
   background = game.add.tileSprite(0, 0, 1000, 600, 'background');
   background.scale.x = 1;
   background.scale.y = 2;
-  //set keys to keyboard input
 
+  backgroundSoundTrack = game.sound.add('gamePlay');
+  backgroundSoundTrack.play();
+  backgroundSoundTrack.loopFull();
+  backgroundSoundTrack.volume = 0.5;
+
+  //set keys to keyboard input
   game.leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT) && game.input.keyboard.addKey(Phaser.Keyboard.A);
   game.rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT) && game.input.keyboard.addKey(Phaser.Keyboard.D);
+
+  emotionalSupportAlien = game.add.sprite(window.innerHeight + 10, window.innerWidth - 100, 'emotionalSupportAlien');
 
   //set player to playerShip
   //set player to game.add.sprite to enable body physics
@@ -75,10 +82,10 @@ function create() {
   player.body.velocity.x = 200; //set default x velocity to 200
 
   // Create enemy lasers
-  lasers = game.add.group(); //create group of lasers
+  lasers = game.add.group(); // Create group of lasers
   lasers.enableBody = true;
   game.physics.arcade.enable(lasers, Phaser.Physics.ARCADE);
-  lasers.createMultiple(100, 'laser'); //add 100 laser bullets to group
+  lasers.createMultiple(100, 'laser'); // Add 100 laser bullets to group
   lasers.setAll('anchor.x', 0.5);
   lasers.setAll('anchor.y', 0.5);
   lasers.setAll('scale.x', 0.5);
@@ -119,7 +126,7 @@ function create() {
   specialEnemies.setAll('checkWorldBounds', true);
   specialEnemies.setAll('angle', 180);
 
-  emotionalSupportAlien = game.add.sprite(0, window.innerWidth - 100, 'emotionalSupportAlien');
+  
 
   setInterval(function() {
     healthAppear();
@@ -186,7 +193,6 @@ let ENEMY_X = 0;
 let spawnSpecialEnemy = false;
 function deployEnemyShips() {
   let ENEMY_SPEED = 300;
-
   let enemy = enemies.getFirstExists(false);
   if (enemy) {
     enemy.reset(enemyXSpawn, 0);
@@ -322,7 +328,7 @@ const gameOver = document.querySelector('.gameover');
 const restart = document.querySelector('.restart');
 //Function killPlayer removes the player from the game
 function killPlayer() {
-  let explosion = game.add.sprite(player.x - 50, player.y - 80, 'explosion');
+  let explosion = game.add.Tilesprite(player.x - 50, player.y - 80, 'explosion');
   explosion.scale.set(4);
   explosion.animations.add('boom');
   explosion.play('boom', 15, false, true);
