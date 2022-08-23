@@ -29,26 +29,28 @@ function preload() {
   let leftKey;
   let rightKey;
   game.load.image('background', 'assets/images/spacebg.gif');
-  //player ship
-  game.load.image('playerShip', 'assets/images/spaceship.png');
-  //enemy ship
+  // Player ship
+  game.load.image('playerShip', 'assets/images/playerShip.gif');
+  // Enemy ship
   game.load.image('enemyShip', 'assets/images/enemy.png');
-  //special enemy ship
+  // Special enemy ship
   game.load.image('specialEnemy', 'assets/images/newEnemyShip.png');
-  //player shot
+  // Player shot
   game.load.image('laser', 'assets/images/shot.png');
-  //health pickup
-  game.load.image('healthPickup', 'assets/images/heart2.png');
-  //explosion
-  game.load.spritesheet('explosion', 'assets/explosion3.png', 32, 32);
-  //sounds
+  // Health pickup
+  game.load.image('healthPickup', 'assets/images/heart2.gif');
+  // Explosion
+  game.load.image('explosion', 'assets/explosion3.gif');
+  // Emotional support alien
+  game.load.image('emotionalSupportAlien', 'assets/images/emotionalSupportAlien.gif');
+  // Sounds
   game.load.audio('laserBlast', 'assets/laserNoise.wav');
   game.load.audio('enemySplode', 'assets/enemyExplode.wav');
   game.load.audio('healthGet', 'assets/healthSound.wav');
   game.load.audio('playerDie', 'assets/playerDie.wav');
 }
 
-// This funciton holds all the game logic
+// This function holds all the game logic
 
 function create() {
   game.physics.startSystem(Phaser.Physics.ARCADE); //add physics engine
@@ -64,7 +66,7 @@ function create() {
   //set player to playerShip
   //set player to game.add.sprite to enable body physics
   player = game.add.sprite(game.canvas.width / 2, game.canvas.height - 100, 'playerShip');
-  player.scale.set(0.25);
+  player.scale.set(0.9);
   game.physics.arcade.enable(player, Phaser.Physics.ARCADE); //set player physics
   player.body.collideWorldBounds = true; //player cannot leave world bounds
   player.body.bounce.setTo(1);
@@ -118,6 +120,8 @@ function create() {
   specialEnemies.setAll('outOfBoundsKill', true);
   specialEnemies.setAll('checkWorldBounds', true);
   specialEnemies.setAll('angle', 180);
+
+  emotionalSupportAlien = game.add.sprite(0, window.innerWidth - 100, 'emotionalSupportAlien');
 
   setInterval(function() {
     healthAppear();
@@ -303,7 +307,7 @@ function increaseScore() {
   }
   const highscore = document.querySelector('.highscore');
   highscore.innerHTML = `High Score: ${newHighscore}`;
-  localStorage.setItem('High-Score', newHighscore); //set highscore in local storage
+  localStorage.setItem('High-Score', newHighscore); // Set highscore in local storage
 }
 
 //Function takeDamage reduces the players health on collision with an enemy
