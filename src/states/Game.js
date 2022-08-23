@@ -124,7 +124,7 @@ function create() {
   }, 5000);
 }
 
-// update function changes each frame
+// Update function changes things inside each frame (around 30-60 times per second)
 
 function update() {
   if (game.input.activePointer.isDown) {
@@ -139,28 +139,21 @@ function update() {
     fireLaser();
   }
 
-  //add collision detection for enemyShips and bullets
+  // Add collision detection for enemyShips and bullets
   game.physics.arcade.collide(lasers, enemies, destroyEnemy);
-  //add collision detection for enemyShips and playerShip
+  // Add collision detection for enemyShips and playerShip
   game.physics.arcade.collide(enemies, player, takeDamage);
   if (health <= 0) {
     killPlayer();
   }
-  //add collision detection for specialEnemy and playerShip
+  // Add collision detection for specialEnemy and playerShip
   game.physics.arcade.collide(specialEnemies, player, takeDamage);
   game.physics.arcade.collide(lasers, specialEnemies, destroyEnemy);
-  //add collision for health pickup
+  // Add collision for health pickup
   game.physics.arcade.collide(healthPickup, player, increaseHealth);
 
   background.tilePosition.y += 1;
-  let j = 0;
-  //update captain dialogue for score % 1000 = 0;
-  if (score % 1000 === 0 && score !== 0 && j != 1) {
-    const captainText = document.querySelector('.character-text');
-    captainText.innerHTML = newPhrase();
-  }
 }
-
 
 // Function fireLaser
 // First if statement checks if previous laser fired time has elapsed enough
@@ -183,9 +176,7 @@ function fireLaser() {
   }
 }
 
-
-// Function deployEnemies adds enemies to the game space
-
+// Function deployEnemyShips adds enemies to the game space
 let switchXSpawn = 0;
 let switchToNewPattern = 0;
 let enemyXSpawn = 200;
