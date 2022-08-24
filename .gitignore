@@ -20,3 +20,5 @@ dump/
 higherVolume/
 yarn.lock
 package-lock.json
+
+/setup
