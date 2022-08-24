@@ -1,6 +1,6 @@
 {
     "short_name": "MyPhaserGame",
-    "name": "PhaserES6Webpack",
+    "name": "PhaserALevelGame",
     "start_url": "./index.html",
     "display": "standalone",
     "theme_color": "#ffffff",

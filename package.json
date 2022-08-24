@@ -1,8 +1,8 @@
 {
-    "name": "PhaserES6Webpack",
+    "name": "PhaserALevelGame",
     "version": "1.2.1",
     "description": "",
-    "author": "leandro cabrera <leandcabrera@gmail.com>",
+    "author": "JackFoot <jackot11f@gmail.com>",
     "main": "index.js",
     "scripts": {
         "dev": "webpack",

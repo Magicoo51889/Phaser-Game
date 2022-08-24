@@ -1,8 +1,4 @@
-/**
- * Galaxy Dawg, a Space Invader inspired top-down space shooter
- */
-
-//create game
+// Create game
 
 const game = new Phaser.Game(400, 730, Phaser.AUTO, 'game-wrapper', {
   preload: preload,
@@ -13,60 +9,47 @@ const game = new Phaser.Game(400, 730, Phaser.AUTO, 'game-wrapper', {
 let player;
 let healthPickup;
 let background;
-let laser; //to hold players laser shots
+let laser; // To hold each laser
 let lasers;
 let laserTime = 0;
-let enemies; //to hold all the enemies
-let specialEnemies; //hold special enemies
+let enemies; // To hold all the enemies
+let specialEnemies; // To hold special enemies
 let score = 0;
 
 let newHighscore = 0;
 if (localStorage.getItem('High-Score')) {
-  newHighscore = localStorage.getItem('High-Score'); //use local storage to save highscore
+  newHighscore = localStorage.getItem('High-Score'); // Use local storage to save highscore
 }
 const scoreText = document.querySelector('.score');
 let health = 200;
 
-/******************
- *
- * preload function preloads all the games assets
- * */
+// Loads all assets
 function preload() {
-  let mouseClick;
-  let leftKey;
-  let rightKey;
+  // Load all assets
   game.load.image('background', 'assets/images/spacebg.gif');
-  //player ship
-  game.load.image('playerShip', 'assets/images/spaceship.png');
-  //enemy ship
+  // Player ship
+  game.load.image('playerShip', 'assets/images/playerShip.gif');
+  // Enemy ship
   game.load.image('enemyShip', 'assets/images/enemy.png');
-  //special enemy ship
-  game.load.image('specialEnemy', 'assets/images/newEnemyShip.png');
-  //player shot
+  // Special enemy ship
+  game.load.image('specialEnemy', 'assets/images/newEnemyShip.gif');
+  // Player shot
   game.load.image('laser', 'assets/images/shot.png');
-  //health pickup
-  game.load.image('healthPickup', 'assets/images/heart2.png');
-  //explosion
-  game.load.spritesheet('explosion', 'assets/explosion3.png', 32, 32);
-  //sounds
+  // Health pickup
+  game.load.image('healthPickup', 'assets/images/heart2.gif');
+  // Explosion
+  game.load.spritesheet('explosion', 'assets/images/explosion3.png', 32, 32);
+  // Emotional support alien
+  game.load.spritesheet('emotionalSupportAlien', 'assets/images/emotionalSupportAlien.png', 35, 55);
+  // Sounds
   game.load.audio('laserBlast', 'assets/laserNoise.wav');
   game.load.audio('enemySplode', 'assets/enemyExplode.wav');
   game.load.audio('healthGet', 'assets/healthSound.wav');
   game.load.audio('playerDie', 'assets/playerDie.wav');
+  game.load.audio('gamePlay', 'assets/GamePlaySoundTrack.mp3');
 }
 
-/*****************************************
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *  function create holds all the game logic
- * */
+// This function holds all the game logic
 
 function create() {
   game.physics.startSystem(Phaser.Physics.ARCADE); //add physics engine
@@ -74,15 +57,22 @@ function create() {
   background = game.add.tileSprite(0, 0, 1000, 600, 'background');
   background.scale.x = 1;
   background.scale.y = 2;
-  //set keys to keyboard input
 
-  game.leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
-  game.rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+  backgroundSoundTrack = game.sound.add('gamePlay');
+  backgroundSoundTrack.play();
+  backgroundSoundTrack.loopFull();
+  backgroundSoundTrack.volume = 0.5;
+
+  //set keys to keyboard input
+  game.leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT) && game.input.keyboard.addKey(Phaser.Keyboard.A);
+  game.rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT) && game.input.keyboard.addKey(Phaser.Keyboard.D);
+
+  emotionalSupportAlien = game.add.sprite(window.innerHeight + 10, window.innerWidth - 100, 'emotionalSupportAlien');
 
   //set player to playerShip
   //set player to game.add.sprite to enable body physics
   player = game.add.sprite(game.canvas.width / 2, game.canvas.height - 100, 'playerShip');
-  player.scale.set(0.25);
+  player.scale.set(0.9);
   game.physics.arcade.enable(player, Phaser.Physics.ARCADE); //set player physics
   player.body.collideWorldBounds = true; //player cannot leave world bounds
   player.body.bounce.setTo(1);
@@ -91,14 +81,11 @@ function create() {
   player.x = game.input.x || game.world.width * 0.5; //player starts in middle of screen
   player.body.velocity.x = 200; //set default x velocity to 200
 
-  /**
-   * create player laser bullet
-   */
-
-  lasers = game.add.group(); //create group of lasers
+  // Create enemy lasers
+  lasers = game.add.group(); // Create group of lasers
   lasers.enableBody = true;
   game.physics.arcade.enable(lasers, Phaser.Physics.ARCADE);
-  lasers.createMultiple(100, 'laser'); //add 100 laser bullets to group
+  lasers.createMultiple(100, 'laser'); // Add 100 laser bullets to group
   lasers.setAll('anchor.x', 0.5);
   lasers.setAll('anchor.y', 0.5);
   lasers.setAll('scale.x', 0.5);
@@ -106,13 +93,10 @@ function create() {
   lasers.setAll('outOfBoundsKill', true);
   lasers.setAll('checkWorldBounds', true);
 
-  /**
-   * Create enemies
-   */
+  // Create enemies
 
-  //make enemy shoot bullet
-  //create enemy class to define several features ****
-  // enemy movement and make enemy fire at random intervals
+  // Make enemy shoot lasers
+  // Enemy movement and make enemy fire at random intervals
 
   enemies = game.add.group();
   enemies.enableBody = true;
@@ -128,9 +112,8 @@ function create() {
 
   deployEnemyShips();
 
-  /**
-   * Create special more difficult enemy
-   */
+  // Create special enemies (bosses)
+
   specialEnemies = game.add.group();
   specialEnemies.enableBody = true;
   game.physics.arcade.enable(specialEnemies, Phaser.Physics.ARCADE);
@@ -143,28 +126,16 @@ function create() {
   specialEnemies.setAll('checkWorldBounds', true);
   specialEnemies.setAll('angle', 180);
 
+  
+
   setInterval(function() {
     healthAppear();
   }, 5000);
 }
 
-/*****************************************
- *
- *
- *
- *
- *
- *
- *
- *
- *  update function holds code on updating game objects
- * */
-function update() {
-  /**
-   *
-   *
-   */
+// Update function changes things inside each frame (around 30-60 times per second)
 
+function update() {
   if (game.input.activePointer.isDown) {
     playerMovement();
   }
@@ -177,36 +148,29 @@ function update() {
     fireLaser();
   }
 
-  //add collision detection for enemyShips and bullets
+  // Add collision detection for enemyShips and bullets
   game.physics.arcade.collide(lasers, enemies, destroyEnemy);
-  //add collision detection for enemyShips and playerShip
+  // Add collision detection for enemyShips and playerShip
   game.physics.arcade.collide(enemies, player, takeDamage);
   if (health <= 0) {
     killPlayer();
   }
-  //add collision detection for specialEnemy and playerShip
+  // Add collision detection for specialEnemy and playerShip
   game.physics.arcade.collide(specialEnemies, player, takeDamage);
   game.physics.arcade.collide(lasers, specialEnemies, destroyEnemy);
-  //add collision for health pickup
+  // Add collision for health pickup
   game.physics.arcade.collide(healthPickup, player, increaseHealth);
 
   background.tilePosition.y += 1;
-  let j = 0;
-  //update captain dialogue for score % 1000 = 0;
-  if (score % 1000 === 0 && score !== 0 && j != 1) {
-    const captainText = document.querySelector('.character-text');
-    captainText.innerHTML = newPhrase();
-  }
 }
 
-/*********************
- * function fireLaser
- * first if statement checks if previous laser fired time has elapsed enough
- * laser is set to first laser in lasers group
- * second if condition sets position of laser to player body
- * velocity is set to shoot out laser
- * set laserTime to current time + 200 so player cannot shoot laser rapidly
- */
+// Function fireLaser
+// First if statement checks if previous laser fired time has elapsed enough
+// Laser is set to first laser in lasers group
+// Second if condition sets position of laser to player body
+// Velocity is set to shoot out laser
+// Set laserTime to current time + 200 so player cannot shoot laser rapidly
+
 function fireLaser() {
   if (game.time.now > laserTime) {
     laser = lasers.getFirstExists(false);
@@ -221,10 +185,7 @@ function fireLaser() {
   }
 }
 
-/**
- *
- * Function deployEnemies adds enemies to the game space
- */
+// Function deployEnemyShips adds enemies to the game space
 let switchXSpawn = 0;
 let switchToNewPattern = 0;
 let enemyXSpawn = 200;
@@ -232,7 +193,6 @@ let ENEMY_X = 0;
 let spawnSpecialEnemy = false;
 function deployEnemyShips() {
   let ENEMY_SPEED = 300;
-
   let enemy = enemies.getFirstExists(false);
   if (enemy) {
     enemy.reset(enemyXSpawn, 0);
@@ -299,10 +259,11 @@ function deployEnemyShips() {
     }
   }
 }
+
 let specialCount = 0;
 let specialEnemyXSpawn = 200;
 function deploySpecialEnemy() {
-  //figure out how to get rid of normal enemies while special enemy is in play
+  // Figure out how to get rid of normal enemies while special enemy is in play
   if (spawnSpecialEnemy) {
     let specialEnemy = specialEnemies.getFirstExists(false);
 
@@ -328,11 +289,7 @@ function deploySpecialEnemy() {
   }
 }
 
-/******************
- *
- * function destroyEnemy kills the laser and enemy upon
- * collision between the two
- */
+// Function destroyEnemy kills the laser and enemy upon collison
 function destroyEnemy(enemy, laser) {
   enemy.kill();
   laser.kill();
@@ -345,34 +302,23 @@ function destroyEnemy(enemy, laser) {
   soundExplode.play();
 }
 
-//Function increaseScore increass the players score by 50
+//Function increaseScore increases the players score by 10
 function increaseScore() {
-  score += 50;
+  score += 10;
   scoreText.innerHTML = `Score: ${score}`;
   if (score > newHighscore) {
     newHighscore = score;
   }
   const highscore = document.querySelector('.highscore');
   highscore.innerHTML = `High Score: ${newHighscore}`;
-  localStorage.setItem('High-Score', newHighscore); //set highscore in local storage
+  localStorage.setItem('High-Score', newHighscore); // Set highscore in local storage
 }
 
-//Function takeDamage reduces the players health on collision with enemy
+//Function takeDamage reduces the players health on collision with an enemy
 const healthText = document.querySelector('#health');
 function takeDamage(player, enemy, specialEnemy) {
   let playerDeath = game.add.sound('playerDie');
   playerDeath.play();
-  const dogImage = document.querySelector('.player-image');
-  dogImage.classList.add('saturate');
-  setInterval(function() {
-    dogImage.classList.remove('saturate');
-  }, 100);
-  setInterval(function() {
-    dogImage.classList.add('saturate');
-  }, 200);
-  setInterval(function() {
-    dogImage.classList.remove('saturate');
-  }, 100);
   enemy.kill();
   health -= 100;
   healthText.innerHTML = `Health: ${health}`;
@@ -382,7 +328,7 @@ const gameOver = document.querySelector('.gameover');
 const restart = document.querySelector('.restart');
 //Function killPlayer removes the player from the game
 function killPlayer() {
-  let explosion = game.add.sprite(player.x - 50, player.y - 80, 'explosion');
+  let explosion = game.add.Tilesprite(player.x - 50, player.y - 80, 'explosion');
   explosion.scale.set(4);
   explosion.animations.add('boom');
   explosion.play('boom', 15, false, true);
