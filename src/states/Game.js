@@ -142,8 +142,8 @@ function create() {
         menu.anchor.setTo(0.5, 0.5);
 
         // And a label to illustrate which menu item was chosen. (This is not necessary)
-        choiseLabel = game.add.text(window.innerWidth/2, window.innerHeight-150, 'Click outside menu to continue', { font: '30px Arial', fill: '#fff' });
-        choiseLabel.anchor.setTo(0.5, 0.5);
+        choiceLabel = game.add.text(window.innerWidth/2, window.innerHeight-150, 'Click outside menu to continue', { font: '30px Arial', fill: '#fff' });
+        choiceLabel.anchor.setTo(0.5, 0.5);
     });
 }
 
@@ -417,19 +417,19 @@ function unpause(event){
         // Check if the click was inside the menu
         if(event.x > x1 && event.x < x2 && event.y > y1 && event.y < y2 ){
             // The choicemap is an array that will help us see which item was clicked
-            var choisemap = ['one', 'two', 'three', 'four', 'five', 'six'];
+            var choicemap = ['one', 'two', 'three', 'four', 'five', 'six'];
             // Get menu local coordinates for the click
             var x = event.x - x1,
                 y = event.y - y1;
             // Calculate the choice 
-            var choise = Math.floor(x / 90) + 3*Math.floor(y / 90);
+            var choice = Math.floor(x / 90) + 3*Math.floor(y / 90);
             // Display the choice
-            choiseLabel.text = 'You chose menu item: ' + choisemap[choise];
+            choiceLabel.text = 'You chose menu item: ' + choicemap[choice];
         }
         else{
             // Remove the menu and the label
             menu.destroy();
-            choiseLabel.destroy();
+            choiceLabel.destroy();
             // Unpause the game
             game.paused = false;
         }
