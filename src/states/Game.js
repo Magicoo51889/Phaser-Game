@@ -66,6 +66,7 @@ function create() {
   //set keys to keyboard input
   game.leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT) && game.input.keyboard.addKey(Phaser.Keyboard.A);
   game.rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT) && game.input.keyboard.addKey(Phaser.Keyboard.D);
+  
 
   emotionalSupportAlien = game.add.sprite(window.innerHeight + 10, window.innerWidth - 100, 'emotionalSupportAlien');
 
@@ -124,13 +125,26 @@ function create() {
   specialEnemies.setAll('scale.y', 1.3);
   specialEnemies.setAll('outOfBoundsKill', true);
   specialEnemies.setAll('checkWorldBounds', true);
-  specialEnemies.setAll('angle', 180);
-
-  
+  specialEnemies.setAll('angle', 180);  
 
   setInterval(function() {
     healthAppear();
   }, 5000);
+
+  pause_label = game.add.text(window.innerWidth - 100, 20, 'Pause', { font: '24px Arial', fill: '#fff' });
+    pause_label.inputEnabled = true;
+    pause_label.events.onInputUp.add(function () {
+        // When the paus button is pressed, we pause the game
+        game.paused = true;
+
+        // Then add the menu
+        menu = game.add.sprite(window.innerWidth/2, window.innerHeight/2, 'menu');
+        menu.anchor.setTo(0.5, 0.5);
+
+        // And a label to illustrate which menu item was chosen. (This is not necessary)
+        choiseLabel = game.add.text(window.innerWidth/2, window.innerHeight-150, 'Click outside menu to continue', { font: '30px Arial', fill: '#fff' });
+        choiseLabel.anchor.setTo(0.5, 0.5);
+    });
 }
 
 // Update function changes things inside each frame (around 30-60 times per second)
@@ -389,4 +403,35 @@ function playerMovement() {
     player.body.velocity.x = player.body.velocity.x * -1;
     fireLaser();
   }
+}
+
+game.input.onDown.add(unpause, self);
+
+// Method that handles the unpause event
+function unpause(event){
+    // Only act if paused
+    if(game.paused){
+        // Calculate the corners of the menu
+        var x1 = window.innerWidth/2 - 270/2, x2 = window.innerWidth/2 + 270/2,
+            y1 = window.innerHeight/2 - 180/2, y2 = window.innerHeight/2 + 180/2;
+        // Check if the click was inside the menu
+        if(event.x > x1 && event.x < x2 && event.y > y1 && event.y < y2 ){
+            // The choicemap is an array that will help us see which item was clicked
+            var choisemap = ['one', 'two', 'three', 'four', 'five', 'six'];
+            // Get menu local coordinates for the click
+            var x = event.x - x1,
+                y = event.y - y1;
+            // Calculate the choice 
+            var choise = Math.floor(x / 90) + 3*Math.floor(y / 90);
+            // Display the choice
+            choiseLabel.text = 'You chose menu item: ' + choisemap[choise];
+        }
+        else{
+            // Remove the menu and the label
+            menu.destroy();
+            choiseLabel.destroy();
+            // Unpause the game
+            game.paused = false;
+        }
+    }
 }
