@@ -42,7 +42,7 @@ function preload() {
   // Emotional support alien
   game.load.spritesheet('emotionalSupportAlien', 'assets/images/emotionalSupportAlien.png', 35, 55);
   // Sounds
-  game.load.audio('laserBlast', 'assets/laserNoise.wav');
+  game.load.audio('laserBlast', 'assets/laserBlast.wav');
   game.load.audio('enemySplode', 'assets/enemyExplode.wav');
   game.load.audio('healthGet', 'assets/healthSound.wav');
   game.load.audio('playerDie', 'assets/playerDie.wav');
@@ -193,8 +193,8 @@ function fireLaser() {
       laser.body.velocity.y = -400;
 
       laserTime = game.time.now + 200;
-      let laserBlast = game.sound.add('laserBlast');
-      laserBlast.play();
+      laserBlastSE = game.sound.add('laserBlast');
+      laserBlastSE.play();
     }
   }
 }
@@ -331,8 +331,8 @@ function increaseScore() {
 //Function takeDamage reduces the players health on collision with an enemy
 const healthText = document.querySelector('#health');
 function takeDamage(player, enemy, specialEnemy) {
-  let playerDeath = game.add.sound('playerDie');
-  playerDeath.play();
+  let playerDeathSE = game.add.sound('playerDie');
+  playerDeathSE.play();
   enemy.kill();
   health -= 100;
   healthText.innerHTML = `Health: ${health}`;
@@ -364,14 +364,6 @@ function killPlayer() {
   });
 }
 
-//function new phrase returns a random phrase
-function newPhrase() {
-  const phrases = ['GOOD SHOOTING, PUP!', 'MORE ENEMIES INCOMING!', 'WHOA! KEEP IT UP!', 'THATS A GOOD BOY!'];
-
-  var returnPhrase = phrases[Math.floor(Math.random() * phrases.length)];
-  return returnPhrase;
-}
-
 function healthAppear() {
   let randomX = Math.floor(Math.random() * 600);
   healthPickup = game.add.sprite(randomX, 20, 'healthPickup');
@@ -388,8 +380,9 @@ function healthAppear() {
 function increaseHealth(healthPickup) {
   healthPickup.kill();
   health += 50;
-  let healthSound = game.add.sound('healthGet');
-  healthSound.play();
+  increaseScore();
+  let healthSoundSE = game.add.sound('healthGet');
+  healthSoundSE.play();
   healthText.innerHTML = `Health: ${health}`;
   healthText.classList.add('glowText');
   setInterval(function() {
@@ -405,8 +398,7 @@ function playerMovement() {
   }
 }
 
-game.input.onDown.add(unpause, self);
-
+//game.input.onDown.add(unpause, self);
 // Method that handles the unpause event
 function unpause(event){
     // Only act if paused
