@@ -32,7 +32,7 @@ function preload() {
   // Enemy ship
   game.load.image('enemyShip', 'assets/images/enemy.png');
   // Special enemy ship
-  game.load.image('specialEnemy', 'assets/images/newEnemyShip.gif');
+  game.load.image('specialEnemy', 'assets/images/newEnemyShip.png');
   // Player shot
   game.load.image('laser', 'assets/images/shot.png');
   // Health pickup
@@ -119,6 +119,7 @@ function create() {
   specialEnemies.enableBody = true;
   game.physics.arcade.enable(specialEnemies, Phaser.Physics.ARCADE);
   specialEnemies.createMultiple(100, 'specialEnemy');
+  specialEnemies.scale.set(0.5);
   specialEnemies.setAll('anchor.x', 0.5);
   specialEnemies.setAll('anchor.y', 0.5);
   specialEnemies.setAll('scale.x', 1.3);

@@ -14,8 +14,8 @@
     <style>
         html,
         body {
-            margin: 0;
-            padding: 0;
+            font: 16px Arial, Helvetica, sans-serif;
+            margin: -0.10%;
         }
 
         #game-wrapper {
@@ -110,8 +110,8 @@
             .outside-game{
               margin: auto;
               position: absolute;
-              padding-left: 40%;
-              width: 42%;
+              padding-left: 10%;
+              width: 30%;
               background: black;
             }
             .character-image{
@@ -174,8 +174,21 @@
 </head>
 
 <body>
-
-    <div id="content"></div>
+    <div class="outside-game">    
+        <div id="game-wrapper">
+                <h1 class="score">Score: 0</h1>
+                <h1 class="gameover">GAME OVER</h1>
+                <div class="restart display-none">RESTART</div>
+                <h5 id="health">Health: 200</h5>
+        </div>
+        <div class="highscore-div">
+            <h1 class="highscore">High Score: </h1>
+        </div>
+        <div class="game"></div>
+        <footer>Created by Jack Foot</footer>
+    </div>
+    
+<div id="content"></div>
     <!-- uncomment the line bellow for cordova feature -->
     <!-- <script type="text/javascript" src="cordova.js"></script> -->
 <script type="text/javascript" src="./dist/vendor.bundle.js"></script><script type="text/javascript" src="./dist/bundle.js"></script></body>
