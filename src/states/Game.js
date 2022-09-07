@@ -26,27 +26,27 @@ let health = 200;
 // Loads all assets
 function preload() {
   // Load all assets
-  game.load.image('background', 'assets/images/spacebg.gif');
+  game.load.image('background', 'src/sprites/images/spacebg.gif');
   // Player ship
-  game.load.image('playerShip', 'assets/images/playerShip.gif');
+  game.load.image('playerShip', 'src/sprites/images/playerShip.gif');
   // Enemy ship
-  game.load.image('enemyShip', 'assets/images/enemy.png');
+  game.load.image('enemyShip', 'src/sprites/images/enemy.png');
   // Special enemy ship
-  game.load.image('specialEnemy', 'assets/images/newEnemyShip.png');
+  game.load.image('specialEnemy', 'src/sprites/images/newEnemyShip.png');
   // Player shot
-  game.load.image('laser', 'assets/images/shot.png');
+  game.load.image('laser', 'src/sprites/images/shot.png');
   // Health pickup
-  game.load.image('healthPickup', 'assets/images/heart2.gif');
+  game.load.image('healthPickup', 'src/sprites/images/heart2.gif');
   // Explosion
-  game.load.spritesheet('explosion', 'assets/images/explosion3.png', 32, 32);
+  game.load.spritesheet('explosion', 'src/sprites/images/explosion3.png', 32, 32);
   // Emotional support alien
-  game.load.spritesheet('emotionalSupportAlien', 'assets/images/emotionalSupportAlien.png', 35, 55);
+  game.load.spritesheet('emotionalSupportAlien', 'src/sprites/images/emotionalSupportAlien.png', 35, 55);
   // Sounds
-  game.load.audio('laserBlast', 'assets/laserBlast.wav');
-  game.load.audio('enemySplode', 'assets/enemyExplode.wav');
-  game.load.audio('healthGet', 'assets/healthSound.wav');
-  game.load.audio('playerDie', 'assets/playerDie.wav');
-  game.load.audio('gamePlay', 'assets/GamePlaySoundTrack.mp3');
+  game.load.audio('laserBlast', 'src/sprites/laserBlast.wav');
+  game.load.audio('enemySplode', 'src/sprites/enemyExplode.wav');
+  game.load.audio('healthGet', 'src/sprites/healthSound.wav');
+  game.load.audio('playerDie', 'src/sprites/playerDie.wav');
+  game.load.audio('gamePlay', 'src/sprites/GamePlaySoundTrack.mp3');
 }
 
 // This function holds all the game logic
