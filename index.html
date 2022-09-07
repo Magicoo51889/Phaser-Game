@@ -14,15 +14,181 @@
     <style>
         html,
         body {
-            margin: 0;
-            padding: 0;
+            font: 16px Arial, Helvetica, sans-serif;
+            margin: -0.10%;
         }
+
+        #game-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: blue;
+            width: 400px;
+            height: 730px;
+            position: relative;
+            border: 5px solid white;
+        }
+         header{
+             display: none;
+        }
+         footer{
+           display: none;
+        }
+        .score{
+             position: absolute;
+             color: white;
+             bottom: 90%;
+             font-family: 'Press Start 2P', cursive;
+        }
+        .gameover{
+           position: absolute;
+           color: white;
+           bottom: 50%;
+           font-family: 'Press Start 2P', cursive;
+           display: none;
+        }
+        .restart{
+           position: absolute;
+           color: white;
+           bottom: 50%;
+           font-family: 'Press Start 2P', cursive;
+           cursor: pointer;
+           border: 2px solid white;
+           padding: 5px;
+           margin-bottom: -5%;
+        }
+        .restart:hover{
+           color: yellow;
+        }
+        #health{
+           position: absolute;
+           color: white;
+           bottom: 1%;
+           font-family: 'Press Start 2P', cursive;
+        }
+        .display-none{
+           display: none;
+        }
+        .glowText{
+           animation-name: glow;
+           animation-duration: 1s;
+        
+        }
+        @keyframes glow {
+           from {color: white;}
+           to {color: yellow;}
+         }
+        @media only screen and (min-width: 768px){
+            .desktop-margins{
+                background: black;
+
+            }
+            header{
+                padding-top: 10px;
+                display: inherit;
+                text-align: center;
+                background: black;
+                height: 75px;
+                width: 100%;
+                color: white;
+                font-family: 'Press Start 2P', cursive;
+                font-size: 20px;
+            }
+            footer{
+                padding-top: 10px;
+                display: inherit;
+                text-align: center;
+                background: black;
+                height: 75px;
+                width: 50%;
+                line-height: 1.5em;
+                color: white;
+                font-family: 'Press Start 2P', cursive;
+                font-size: 20px;
+            }
+            .outside-game{
+              margin: auto;
+              position: absolute;
+              padding-left: 10%;
+              width: 30%;
+              background: black;
+            }
+            .character-image{
+                position: absolute;
+                right: 57%;
+                margin-top: 8%;
+                height: 300px;
+                width: 200px;
+                border: 2px solid white;
+                background-image: url('assets/commanderplaceholder.png');
+                background-size: cover;;
+            }
+            .character-text{
+                display: initial; 
+                position: absolute;
+                width: 110%;
+                top: 300px;
+                color: white;
+                font-family: 'Press Start 2P', cursive;
+                line-height: 1.5em;
+            }
+            .highscore-div{
+                position: absolute;
+                padding-left: 32%;
+                bottom: 16%;
+            }
+            .highscore{
+                color: white;
+                font-family: 'Press Start 2P', cursive;
+                width: 50%;
+                line-height: 1.2em;
+            }
+        
+            .player-image{
+                position: absolute;
+                left: 80%;
+                margin-top: 8%;
+                height: 300px;
+                width: 200px;
+                border: 2px solid white;
+                background-image: url('assets/placeholderdog.png');
+                background-size: cover;
+            }
+            .saturate{
+                filter: saturate(6000%);
+
+            }
+            .player-text{
+                display: initial; 
+                position: absolute;
+                width: 110%;
+                top: 300px;
+                color: white;
+                font-family: 'Press Start 2P', cursive;
+                line-height: 1.5em;
+            }
+        }
+
     </style>
 </head>
 
 <body>
-
-    <div id="content"></div>
+    <div class="outside-game">    
+        <div id="game-wrapper">
+                <h1 class="score">Score: 0</h1>
+                <h1 class="gameover">GAME OVER</h1>
+                <div class="restart display-none">RESTART</div>
+                <h5 id="health">Health: 200</h5>
+        </div>
+        <div class="highscore-div">
+            <h1 class="highscore">High Score: </h1>
+        </div>
+        <div class="game"></div>
+        <footer>Created by Jack Foot</footer>
+    </div>
+    
+<div id="content"></div>
     <!-- uncomment the line bellow for cordova feature -->
     <!-- <script type="text/javascript" src="cordova.js"></script> -->
 <script type="text/javascript" src="./dist/vendor.bundle.js"></script><script type="text/javascript" src="./dist/bundle.js"></script></body>

@@ -32,7 +32,7 @@ function preload() {
   // Enemy ship
   game.load.image('enemyShip', 'assets/images/enemy.png');
   // Special enemy ship
-  game.load.image('specialEnemy', 'assets/images/newEnemyShip.gif');
+  game.load.image('specialEnemy', 'assets/images/newEnemyShip.png');
   // Player shot
   game.load.image('laser', 'assets/images/shot.png');
   // Health pickup
@@ -42,7 +42,7 @@ function preload() {
   // Emotional support alien
   game.load.spritesheet('emotionalSupportAlien', 'assets/images/emotionalSupportAlien.png', 35, 55);
   // Sounds
-  game.load.audio('laserBlast', 'assets/laserNoise.wav');
+  game.load.audio('laserBlast', 'assets/laserBlast.wav');
   game.load.audio('enemySplode', 'assets/enemyExplode.wav');
   game.load.audio('healthGet', 'assets/healthSound.wav');
   game.load.audio('playerDie', 'assets/playerDie.wav');
@@ -66,6 +66,7 @@ function create() {
   //set keys to keyboard input
   game.leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT) && game.input.keyboard.addKey(Phaser.Keyboard.A);
   game.rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT) && game.input.keyboard.addKey(Phaser.Keyboard.D);
+  
 
   emotionalSupportAlien = game.add.sprite(window.innerHeight + 10, window.innerWidth - 100, 'emotionalSupportAlien');
 
@@ -118,19 +119,33 @@ function create() {
   specialEnemies.enableBody = true;
   game.physics.arcade.enable(specialEnemies, Phaser.Physics.ARCADE);
   specialEnemies.createMultiple(100, 'specialEnemy');
+  specialEnemies.scale.set(0.5);
   specialEnemies.setAll('anchor.x', 0.5);
   specialEnemies.setAll('anchor.y', 0.5);
   specialEnemies.setAll('scale.x', 1.3);
   specialEnemies.setAll('scale.y', 1.3);
   specialEnemies.setAll('outOfBoundsKill', true);
   specialEnemies.setAll('checkWorldBounds', true);
-  specialEnemies.setAll('angle', 180);
-
-  
+  specialEnemies.setAll('angle', 180);  
 
   setInterval(function() {
     healthAppear();
   }, 5000);
+
+  pause_label = game.add.text(window.innerWidth - 100, 20, 'Pause', { font: '24px Arial', fill: '#fff' });
+    pause_label.inputEnabled = true;
+    pause_label.events.onInputUp.add(function () {
+        // When the paus button is pressed, we pause the game
+        game.paused = true;
+
+        // Then add the menu
+        menu = game.add.sprite(window.innerWidth/2, window.innerHeight/2, 'menu');
+        menu.anchor.setTo(0.5, 0.5);
+
+        // And a label to illustrate which menu item was chosen. (This is not necessary)
+        choiceLabel = game.add.text(window.innerWidth/2, window.innerHeight-150, 'Click outside menu to continue', { font: '30px Arial', fill: '#fff' });
+        choiceLabel.anchor.setTo(0.5, 0.5);
+    });
 }
 
 // Update function changes things inside each frame (around 30-60 times per second)
@@ -179,8 +194,8 @@ function fireLaser() {
       laser.body.velocity.y = -400;
 
       laserTime = game.time.now + 200;
-      let laserBlast = game.sound.add('laserBlast');
-      laserBlast.play();
+      laserBlastSE = game.sound.add('laserBlast');
+      laserBlastSE.play();
     }
   }
 }
@@ -317,8 +332,8 @@ function increaseScore() {
 //Function takeDamage reduces the players health on collision with an enemy
 const healthText = document.querySelector('#health');
 function takeDamage(player, enemy, specialEnemy) {
-  let playerDeath = game.add.sound('playerDie');
-  playerDeath.play();
+  let playerDeathSE = game.add.sound('playerDie');
+  playerDeathSE.play();
   enemy.kill();
   health -= 100;
   healthText.innerHTML = `Health: ${health}`;
@@ -350,14 +365,6 @@ function killPlayer() {
   });
 }
 
-//function new phrase returns a random phrase
-function newPhrase() {
-  const phrases = ['GOOD SHOOTING, PUP!', 'MORE ENEMIES INCOMING!', 'WHOA! KEEP IT UP!', 'THATS A GOOD BOY!'];
-
-  var returnPhrase = phrases[Math.floor(Math.random() * phrases.length)];
-  return returnPhrase;
-}
-
 function healthAppear() {
   let randomX = Math.floor(Math.random() * 600);
   healthPickup = game.add.sprite(randomX, 20, 'healthPickup');
@@ -374,8 +381,9 @@ function healthAppear() {
 function increaseHealth(healthPickup) {
   healthPickup.kill();
   health += 50;
-  let healthSound = game.add.sound('healthGet');
-  healthSound.play();
+  increaseScore();
+  let healthSoundSE = game.add.sound('healthGet');
+  healthSoundSE.play();
   healthText.innerHTML = `Health: ${health}`;
   healthText.classList.add('glowText');
   setInterval(function() {
@@ -389,4 +397,34 @@ function playerMovement() {
     player.body.velocity.x = player.body.velocity.x * -1;
     fireLaser();
   }
+}
+
+//game.input.onDown.add(unpause, self);
+// Method that handles the unpause event
+function unpause(event){
+    // Only act if paused
+    if(game.paused){
+        // Calculate the corners of the menu
+        var x1 = window.innerWidth/2 - 270/2, x2 = window.innerWidth/2 + 270/2,
+            y1 = window.innerHeight/2 - 180/2, y2 = window.innerHeight/2 + 180/2;
+        // Check if the click was inside the menu
+        if(event.x > x1 && event.x < x2 && event.y > y1 && event.y < y2 ){
+            // The choicemap is an array that will help us see which item was clicked
+            var choicemap = ['one', 'two', 'three', 'four', 'five', 'six'];
+            // Get menu local coordinates for the click
+            var x = event.x - x1,
+                y = event.y - y1;
+            // Calculate the choice 
+            var choice = Math.floor(x / 90) + 3*Math.floor(y / 90);
+            // Display the choice
+            choiceLabel.text = 'You chose menu item: ' + choicemap[choice];
+        }
+        else{
+            // Remove the menu and the label
+            menu.destroy();
+            choiceLabel.destroy();
+            // Unpause the game
+            game.paused = false;
+        }
+    }
 }
