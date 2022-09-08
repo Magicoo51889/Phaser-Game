@@ -67,6 +67,20 @@ function create() {
   game.leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT) && game.input.keyboard.addKey(Phaser.Keyboard.A);
   game.rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT) && game.input.keyboard.addKey(Phaser.Keyboard.D);
   
+  pause_label = game.add.text(window.innerWidth - 100, 20, 'Pause');
+    pause_label.inputEnabled = true;
+    pause_label.events.onInputUp.add(function () {
+        // When the pause button is pressed it pauses the game
+        game.paused = true;
+
+        // Then add the menu
+        menu = game.add.sprite(window.innerWidth/2, window.innerHeight/2, 'menu');
+        menu.anchor.setTo(0.5, 0.5);
+
+        // And a label to illustrate which menu item was chosen. (This is not necessary)
+        choiceLabel = game.add.text(window.innerWidth/2, window.innerHeight-150, 'Click outside menu to continue', { font: '30px Arial', fill: '#fff' });
+        choiceLabel.anchor.setTo(0.5, 0.5);
+    });
 
   emotionalSupportAlien = game.add.sprite(window.innerHeight + 10, window.innerWidth - 100, 'emotionalSupportAlien');
 
@@ -131,21 +145,6 @@ function create() {
   setInterval(function() {
     healthAppear();
   }, 5000);
-
-  pause_label = game.add.text(window.innerWidth - 100, 20, 'Pause', { font: '24px Arial', fill: '#fff' });
-    pause_label.inputEnabled = true;
-    pause_label.events.onInputUp.add(function () {
-        // When the paus button is pressed, we pause the game
-        game.paused = true;
-
-        // Then add the menu
-        menu = game.add.sprite(window.innerWidth/2, window.innerHeight/2, 'menu');
-        menu.anchor.setTo(0.5, 0.5);
-
-        // And a label to illustrate which menu item was chosen. (This is not necessary)
-        choiceLabel = game.add.text(window.innerWidth/2, window.innerHeight-150, 'Click outside menu to continue', { font: '30px Arial', fill: '#fff' });
-        choiceLabel.anchor.setTo(0.5, 0.5);
-    });
 }
 
 // Update function changes things inside each frame (around 30-60 times per second)
