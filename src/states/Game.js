@@ -343,7 +343,7 @@ const gameOver = document.querySelector('.gameover');
 const restart = document.querySelector('.restart');
 //Function killPlayer removes the player from the game
 function killPlayer() {
-  let explosion = game.add.Tilesprite(player.x - 50, player.y - 80, 'explosion');
+  let explosion = game.add.sprite(player.x - 50, player.y - 80, 'explosion');
   explosion.scale.set(4);
   explosion.animations.add('boom');
   explosion.play('boom', 15, false, true);
