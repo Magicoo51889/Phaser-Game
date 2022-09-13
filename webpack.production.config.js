@@ -59,7 +59,7 @@ module.exports = {
       hash: true
     }),
     new CopyWebpackPlugin([
-      { from: 'assets', to: 'assets' },
+      { from: 'src/sprites', to: 'src/sprites' },
       { from: 'src/manifest.json', to: './manifest.json' }
     ]),
     new WorkboxPlugin.GenerateSW({
