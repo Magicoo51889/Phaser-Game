@@ -43,7 +43,7 @@
         }
         .gameover{
            position: absolute;
-           color: white;
+           color: red;
            bottom: 50%;
            font-family: 'Press Start 2P';
            display: none;
@@ -86,6 +86,17 @@
             width: 100%;
             line-height: 1.2em;
         }
+        .instructions{
+            position: absolute;
+            color: white;
+            bottom: 50%;
+            font-family: 'Press Start 2P';
+            line-height: 1.2em;
+            top: 50%;
+            left: 110%;
+            width: 75%;
+            text-align: center;
+        }
         @keyframes glow {
            from {color: white;}
            to {color: yellow;}
@@ -107,7 +118,7 @@
                 font-size: 20px;
             }
             footer{
-                padding-top: 10px;
+                padding-top: 35px;
                 display: inherit;
                 text-align: center;
                 background: black;
@@ -180,24 +191,21 @@
                 <h1 class="score">Score: 0</h1>
                 <h1 class="gameover">GAME OVER</h1>
                 <div class="restart display-none">RESTART</div>
-                <h5 id="health">Health: 200</h5>
+                <h4 id="health">Health: 200
+                <h3 class="instructions">Use the arrow keys to move side to side. You shoot when you move!</h3>
                 <div class="highscore-div">
                     <h1 class="highscore">High Score: </h1>
                 </div>
-        </div>
+
+                
+        </h4></div>
         
         <div class="game"></div>
         <footer>Created by Jack Foot</footer>
-
-        <!--If Javascript is disabled then the website will just dissplay this message-->
-        <noscript>
-            <h1> You have Javascript disabled! </h1>
-            <p> Please enable Javascript to play this game </p>
-        </noscript>
     </div>
     
 <div id="content"></div>
     <script type="text/javascript" src="cordova.js"></script>
-<script type="text/javascript" src="dist/vendor.bundle.js"></script><script type="text/javascript" src="dist/bundle.js"></script></body>
+<script type="text/javascript" src="./dist/vendor.bundle.js"></script><script type="text/javascript" src="./dist/bundle.js"></script></body>
 
 </html>

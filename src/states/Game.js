@@ -192,7 +192,7 @@ function fireLaser() {
       laser.reset(player.x + 5, player.y - 80);
       laser.body.velocity.y = -400;
 
-      laserTime = game.time.now + 200;
+      laserTime = game.time.now + 250;
       laserBlastSE = game.sound.add('laserBlast'); // Adding laser sound effect
       laserBlastSE.play();
     }
