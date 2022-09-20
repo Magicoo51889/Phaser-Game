@@ -13,10 +13,10 @@ We're also using cycles like you would in industry such as the SCRUM methodology
 ---
 ### How to install and run the game? 💾
 
-- First you will need to download the files from the 'releases' tab. The only version at the moment is the pre-release version designed for testing.
+1. First you will need to download the files from the 'releases' tab. The only version at the moment is the pre-release version designed for testing.
 
-- Install the files, and use your command line to find the root folder of the game (./). To do this type ``ls`` to identify files you're currently able to access, ``cd {filename}`` to move into the specified file, E.G. ``cd downloads`` will move you to the downloads folder on your computer. Use ``cd`` to move back in the directory.
+2. Install the files, and use your command line to find the root folder of the game (./). To do this type ``ls`` to identify files you're currently able to access, ``cd {filename}`` to move into the specified file, E.G. ``cd downloads`` will move you to the downloads folder on your computer. Use ``cd`` to move back in the directory. **Note that you will need to install the source code as a zip, which is one of the options given, and then unzip that before you will be able to this step!**
 
-- Next once you reach the root folder (the one with src, package.json, and config.xml for example in), you will want to type ``npm i`` or ``npm install``. This will install the packages needed to run the game.
+3. Next once you reach the root folder (the one with src, package.json, and config.xml for example in), you will want to type ``npm i`` or ``npm install``. This will install the packages needed to run the game.
 
-- Finally type ``npm run dev``. This will start the local websever using webpack to launch the game in your browser.
+4. Finally type ``npm run dev``. This will start the local websever using webpack to launch the game in your browser.
