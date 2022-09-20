@@ -10,6 +10,8 @@ Furthermore I've been updating my Gitbook page with the code and documentation, 
 
 We're also using cycles like you would in industry such as the SCRUM methodology. This allows me to plan what I'm going to do that day, work on that piece of code, and then at the end of the day evaluate what I've done and what I need to do next. This is a great way to keep track of what I'm doing and what I need to do.
 
+I hope to be able to use Cordova to allow the game to be run on mobile devices, but this is currently not a priority, and at the moment does not work. The 0.2.0 pre-release does not have cordova features built into it, so do not try using on a mobile device as it will simply not work.
+
 ---
 ### How to install and run the game? 💾
 
