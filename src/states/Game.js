@@ -155,11 +155,11 @@ function update() {
   }
 
   if (game.leftKey.isDown) {
-    player.body.velocity.x = -200;
-    fireLaser();
+    player.body.velocity.x = -200; // Move the player left when pressed
+    fireLaser(); // Run the fire laser method
   } else if (game.rightKey.isDown) {
-    player.body.velocity.x = 200;
-    fireLaser();
+    player.body.velocity.x = 200; // Move the player right when pressed
+    fireLaser(); // Run the fire laser method
   }
 
   // Add collision detection for enemyShips and bullets
@@ -167,7 +167,7 @@ function update() {
   // Add collision detection for enemyShips and playerShip
   game.physics.arcade.collide(enemies, player, takeDamage);
   if (health <= 0) {
-    killPlayer();
+    killPlayer(); // Run the kill player method
   }
   // Add collision detection for specialEnemy and playerShip
   game.physics.arcade.collide(specialEnemies, player, takeDamage);
@@ -193,7 +193,7 @@ function fireLaser() {
       laser.body.velocity.y = -400;
 
       laserTime = game.time.now + 200;
-      laserBlastSE = game.sound.add('laserBlast');
+      laserBlastSE = game.sound.add('laserBlast'); // Adding laser sound effect
       laserBlastSE.play();
     }
   }
