@@ -22,3 +22,5 @@ I hope to be able to use Cordova to allow the game to be run on mobile devices, 
 3. Next once you reach the root folder (the one with src, package.json, and config.xml for example in), you will want to type ``npm i`` or ``npm install``. This will install the packages needed to run the game.
 
 4. Finally type ``npm run dev``. This will start the local websever using webpack to launch the game in your browser.
+
+**Note: If you have downloaded the game to your downloads folder on your C: drive then you can use this command to instantly run the game:** *cd downloads; cd phaser-game-pre-release-v0.2.0.1; npm i; npm run dev*
