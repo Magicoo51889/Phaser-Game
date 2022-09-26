@@ -14,6 +14,7 @@ I hope to be able to use Cordova to allow the game to be run on mobile devices, 
 
 ---
 ### How to install and run the game? 💾
+There is a prerequisite called [Node.js](https://nodejs.org/en/download) that you will need to install before starting the installation process. This is a package manager that allows you to be able to install the other packages needed for the game. During the installation wizard for node.js you will want to also select chocolatey if you are on a windows computer. 
 
 1. First you will need to download the files from the 'releases' tab. The only version at the moment is the pre-release version designed for testing.
 
