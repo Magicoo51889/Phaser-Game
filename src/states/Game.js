@@ -133,7 +133,7 @@ function create() {
   specialEnemies.enableBody = true;
   game.physics.arcade.enable(specialEnemies, Phaser.Physics.ARCADE);
   specialEnemies.createMultiple(100, 'specialEnemy');
-  specialEnemies.scale.set(0.5);
+  specialEnemies.scale.set(0.45);
   specialEnemies.setAll('anchor.x', 0.5);
   specialEnemies.setAll('anchor.y', 0.5);
   specialEnemies.setAll('scale.x', 1.3);
