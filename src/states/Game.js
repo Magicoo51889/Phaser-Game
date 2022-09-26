@@ -409,14 +409,16 @@ function unpause(event){
         // Check if the click was inside the menu
         if(event.x > x1 && event.x < x2 && event.y > y1 && event.y < y2 ){
             // The choicemap is an array that will help us see which item was clicked
-            var choicemap = ['one', 'two', 'three', 'four', 'five', 'six'];
+            var choicemap = ['restart', 'two', 'three', 'four', 'five', 'six'];
             // Get menu local coordinates for the click
             var x = event.x - x1,
                 y = event.y - y1;
             // Calculate the choice 
             var choice = Math.floor(x / 90) + 3*Math.floor(y / 90);
             // Display the choice
-            choiceLabel.text = 'You chose menu item: ' + choicemap[choice];
+            if (choicemap[choice] === 'restart') {
+              location.reload();
+            }
         }
         else{
             // Remove the menu and the label
