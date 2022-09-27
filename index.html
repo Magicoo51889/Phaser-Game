@@ -41,6 +41,17 @@
              bottom: 90%;
              font-family: 'Press Start 2P';
         }
+        .title{
+             position: absolute;
+             color: yellow;
+             height: fit-content;
+             padding: 5px;
+             top: 20%;
+             bottom: 80%;
+             left: 116%;
+             width: max-content;
+             font-family: 'Press Start 2P';
+        }
         .gameover{
            position: absolute;
            color: red;
@@ -89,11 +100,13 @@
         .instructions{
             position: absolute;
             color: white;
+            height: fit-content;
+            padding: 5px;
             bottom: 50%;
             font-family: 'Press Start 2P';
             line-height: 1.2em;
-            top: 50%;
-            left: 110%;
+            top: 40%;
+            left: 122%;
             width: 75%;
             text-align: center;
         }
@@ -192,13 +205,12 @@
                 <h1 class="gameover">GAME OVER</h1>
                 <div class="restart display-none">RESTART</div>
                 <h4 id="health">Health: 200
-                <h3 class="instructions">Use the arrow keys to move side to side. You shoot when you move!</h3>
+                <h1 class="title"> Escape the enemy hoard!
+                <h3 class="instructions">Use the arrow keys to move side to side. You shoot when you move! <br>  <br> To score either shoot the enemies or pick up health. Good luck!</h3>
                 <div class="highscore-div">
                     <h1 class="highscore">High Score: </h1>
                 </div>
-
-                
-        </h4></div>
+        </h1></h4></div>
         
         <div class="game"></div>
         <footer>Created by Jack Foot</footer>

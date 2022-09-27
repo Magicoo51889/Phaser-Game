@@ -18,9 +18,9 @@ There is a prerequisite called [Node.js](https://nodejs.org/en/download) that yo
 
 1. First you will need to download the files from the 'releases' tab. The only version at the moment is the pre-release version designed for testing.
 
-2. Install the files, and use your command line to find the root folder of the game (./). To do this type ``ls`` to identify files you're currently able to access, ``cd {filename}`` to move into the specified file, E.G. ``cd downloads`` will move you to the downloads folder on your computer. Use ``cd`` to move back in the directory. **Note that you will need to install the source code as a zip, which is one of the options given, and then unzip that before you will be able to this step!**
+2. **Note that you will need to install the source code as a zip, which is one of the options given in each realease, and then unzip that before you do this step!** Install the files, and use your command line to find the root folder of the game (./). To do this type ``ls`` into the command line to identify files you're currently able to access, ``cd {filename}`` to move into the specified file, E.G. ``cd downloads`` will move you to the downloads folder on your computer. Use ``cd`` to move back in the directory. 
 
-3. Next once you reach the root folder (the one with src, package.json, and config.xml for example in), you will want to type ``npm i`` or ``npm install``. This will install the packages needed to run the game.
+3. Next once you reach the root folder (the one with src, package.json, and config.xml for example in), you will want to type ``npm i`` or ``npm install``. This will install the packages needed to run the game and is essential.
 
 4. Finally type ``npm run dev``. This will start the local websever using webpack to launch the game in your browser.
 
